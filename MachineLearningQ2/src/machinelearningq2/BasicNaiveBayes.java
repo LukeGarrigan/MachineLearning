@@ -23,24 +23,25 @@ public class BasicNaiveBayes implements Classifier {
     
     @Override
     public void buildClassifier(Instances ins) throws Exception {
-        // Assigns the class of the instance 
-
+        // assigns the class position of the instance 
         ins.setClassIndex(ins.numAttributes() - 1);
-        int numClasses = ins.numClasses();
-        // loops through the data to retrieve all of the classes
-        int classCount = 0;
-        
-        
-        
-        
         for (Instance line : ins) {
+            // creates a list and stores attribute values
             ArrayList<Double> attributeValues = new ArrayList<>();
             for (int i = 0; i < line.numAttributes() - 1; i++) {
                 attributeValues.add(line.value(i));
             }
+            // adds all the Data to DataFound list
             DataFound data = new DataFound(line.classValue(), attributeValues);
             allData.add(data);
         }
+        
+        
+        // printing and checking the values
+        for (DataFound x : allData) {
+            System.out.println(x.getData() + " " + x.getClassValue());
+        }
+
     }
 
     @Override

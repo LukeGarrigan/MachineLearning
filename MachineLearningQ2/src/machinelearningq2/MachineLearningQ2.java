@@ -22,13 +22,17 @@ public class MachineLearningQ2 {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        String trainingDataPath = "C:\\Users\\Luke\\Documents\\NetBeansProjects\\MachineLearningQ2\\datasets\\crime.arff";
-        String testDataPath = "C:\\Users\\Luke\\Documents\\NetBeansProjects\\MachineLearningQ2\\datasets\\crime.arff";
+   
         
+        // paths for the training and test data
+        String trainingDataPath = "datasets/crime.arff";
+        String testDataPath = "datasets/crime.arff";
+        
+        // creating the instances
         Instances trainingData = getData(trainingDataPath);
         Instances testData = getData(testDataPath);
-        trainingData.setClassIndex(trainingData.numAttributes()-1);
-     
+        
+        // building the classifier
         BasicNaiveBayes classify = new BasicNaiveBayes();
         classify.buildClassifier(trainingData);
         
