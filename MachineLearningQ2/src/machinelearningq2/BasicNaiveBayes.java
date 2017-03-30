@@ -18,9 +18,9 @@ import weka.core.Instances;
  * @author Luke
  */
 public class BasicNaiveBayes implements Classifier {
-    
+
     ArrayList<DataFound> allData = new ArrayList<>();
-    
+
     @Override
     public void buildClassifier(Instances ins) throws Exception {
         // assigns the class position of the instance 
@@ -31,13 +31,23 @@ public class BasicNaiveBayes implements Classifier {
             for (int i = 0; i < line.numAttributes() - 1; i++) {
                 attributeValues.add(line.value(i));
             }
-            // adds all the Data to DataFound list
-            DataFound data = new DataFound(line.classValue(), attributeValues);
-            allData.add(data);
+            // If its a new class value create new DataFound object
+            // else just add to the existing 
+            boolean cvExists = false;
+            for (DataFound d : new ArrayList<>(allData)) {
+                if (d.getClassValue() == line.classValue()) {
+                    d.addData(attributeValues);
+                    cvExists = true;
+                }
+            }
+            if (cvExists == false) {
+                DataFound data = new DataFound(line.classValue());
+                data.addData(attributeValues);
+                allData.add(data);
+            }
         }
-        
-        
         // printing and checking the values
+        System.out.println(allData.size());
         for (DataFound x : allData) {
             System.out.println(x.getData() + " " + x.getClassValue());
         }

@@ -6,6 +6,7 @@
 package machinelearningq2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,12 +15,15 @@ import java.util.ArrayList;
 public class DataFound {
     
     double classValue;
-    ArrayList<Double> data;
-    public DataFound(double classValue, ArrayList<Double> data){
+    List<List<Double>> data = new  ArrayList<>();
+    public DataFound(double classValue){
         this.classValue = classValue;
-        this.data = data;
     }
 
+    public void addData(List<Double> d){
+        data.add(d);
+    }
+    
     public double getClassValue() {
         return classValue;
     }
@@ -27,13 +31,8 @@ public class DataFound {
     public void setClassValue(double classValue) {
         this.classValue = classValue;
     }
-
-    public ArrayList<Double> getData() {
+    
+    public List<List<Double>> getData(){
         return data;
     }
-
-    public void setData(ArrayList<Double> data) {
-        this.data = data;
-    }
-    
 }
