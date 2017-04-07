@@ -7,8 +7,10 @@ package machinelearningq2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import weka.classifiers.Classifier;
@@ -22,65 +24,48 @@ import weka.core.Instances;
  */
 public class BasicNaiveBayes implements Classifier {
 
-    ArrayList<DataFound> data = new ArrayList<>();
-
     // Contains the counts of the attributes
     // counts.get(1) will return the first attribute and all its possibilities
-    ArrayList<double[]> counts = new ArrayList<>();
+    ArrayList<Map> counts = new ArrayList<>();
 
     @Override
     public void buildClassifier(Instances ins) throws Exception {
         // assigns the class position of the instance 
         ins.setClassIndex(ins.numAttributes() - 1);
-        System.out.println(ins.numDistinctValues(0));
-        
-        
-        
-        Map<Double, Double> freq = new HashMap<>();
-        System.out.println(ins.enumerateAttributes());
+        //System.out.println(ins.numDistinctValues(0));
+
+        // Creates a map for each Attribute and containing the attribute
+        // value and the count - which is initalised to zero
         for (int i = 0; i < ins.numAttributes() - 1; i++) {
-            double attributeCount[] = new double[ins.numDistinctValues(i)];
-            counts.add(attributeCount);
+            Enumeration<Object> att = ins.attribute(i).enumerateValues();
+            Map<Double, Integer> freq = new HashMap<>();
+            while (att.hasMoreElements()) {
+                // assigning the the next attribute element to a Integer
+                // using .toString() as it requires less memory
+                Double d = new Double(att.nextElement().toString());
+                freq.put(d, 0);
+            }
+            counts.add(freq);
         }
-
-
+        for (Map x : counts) {
+            System.out.println(x);
+            System.out.println("");
+        }
+        
+        // Increments the counts for all the attribute values
         for (Instance line : ins) {
-            double[] attributeVal = new double[line.numValues() - 1];
             for (int i = 0; i < line.numValues() - 1; i++) {
-                attributeVal[i] = line.value(i);
-            }
-            DataFound d = new DataFound(attributeVal, line.classValue());
-            data.add(d);
-        }
-
-        /*
-        for (Instance line : ins) {
-            // creates a list and stores attribute values
-            ArrayList<Double> attributeValues = new ArrayList<>();
-            for (int i = 0; i < line.numAttributes() - 1; i++) {
-                attributeValues.add(line.value(i));
-            }
-            // If its a new class value create new DataFound object
-            // else just add to the existing 
-            boolean cvExists = false;
-            for (DataFound d : new ArrayList<>(allData)) {
-                if (d.getClassValue() == line.classValue()) {
-                    d.addData(attributeValues);
-                    cvExists = true;
-                }
-            }
-            if (cvExists == false) {
-                DataFound data = new DataFound(line.classValue());
-                data.addData(attributeValues);
-                allData.add(data);
+                String attributeValue = line.stringValue(i);
+                Double attribute = new Double(attributeValue);
+                // increments the count for that given attribute value
+                counts.get(i).put(attribute, (Integer) counts.get(i).get(attribute) + 1);
             }
         }
-        // printing and checking the values
-        System.out.println(allData.size());
-        for (DataFound x : allData) {
-            System.out.println(x.getData() + " " + x.getClassValue());
+        
+        for (Map x : counts) {
+            System.out.println(x);
+            System.out.println("");
         }
-         */
     }
 
     @Override
