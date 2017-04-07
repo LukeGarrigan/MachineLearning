@@ -37,6 +37,10 @@ public class MachineLearningQ2 {
         BasicNaiveBayes classify = new BasicNaiveBayes();
         classify.buildClassifier(trainingData);
         
+        
+        
+        classify.probabilityCrime();
+        
     }
     
     /**
