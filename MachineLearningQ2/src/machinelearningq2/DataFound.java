@@ -6,6 +6,7 @@
 package machinelearningq2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,26 +14,27 @@ import java.util.List;
  * @author Luke
  */
 public class DataFound {
-    
-    double classValue;
-    List<List<Double>> data = new  ArrayList<>();
-    public DataFound(double classValue){
+
+    private final double[] attribute;
+    private final double classValue;
+
+    public DataFound(double[] attribute, double classValue) {
+        this.attribute = attribute;
         this.classValue = classValue;
     }
 
-    public void addData(List<Double> d){
-        data.add(d);
+    public double[] getAttribute() {
+        return attribute;
     }
-    
+
     public double getClassValue() {
         return classValue;
     }
 
-    public void setClassValue(double classValue) {
-        this.classValue = classValue;
+    @Override
+    public String toString() {
+        return "DataFound{" + "attribute=" + Arrays.toString(attribute) + ", classValue=" + classValue + '}';
     }
     
-    public List<List<Double>> getData(){
-        return data;
-    }
+   
 }

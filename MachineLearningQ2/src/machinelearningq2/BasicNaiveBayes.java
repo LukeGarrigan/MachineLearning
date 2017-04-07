@@ -6,7 +6,10 @@
 package machinelearningq2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import weka.classifiers.Classifier;
 import weka.core.Capabilities;
@@ -19,12 +22,38 @@ import weka.core.Instances;
  */
 public class BasicNaiveBayes implements Classifier {
 
-    ArrayList<DataFound> allData = new ArrayList<>();
+    ArrayList<DataFound> data = new ArrayList<>();
+
+    // Contains the counts of the attributes
+    // counts.get(1) will return the first attribute and all its possibilities
+    ArrayList<double[]> counts = new ArrayList<>();
 
     @Override
     public void buildClassifier(Instances ins) throws Exception {
         // assigns the class position of the instance 
         ins.setClassIndex(ins.numAttributes() - 1);
+        System.out.println(ins.numDistinctValues(0));
+        
+        
+        
+        Map<Double, Double> freq = new HashMap<>();
+        System.out.println(ins.enumerateAttributes());
+        for (int i = 0; i < ins.numAttributes() - 1; i++) {
+            double attributeCount[] = new double[ins.numDistinctValues(i)];
+            counts.add(attributeCount);
+        }
+
+
+        for (Instance line : ins) {
+            double[] attributeVal = new double[line.numValues() - 1];
+            for (int i = 0; i < line.numValues() - 1; i++) {
+                attributeVal[i] = line.value(i);
+            }
+            DataFound d = new DataFound(attributeVal, line.classValue());
+            data.add(d);
+        }
+
+        /*
         for (Instance line : ins) {
             // creates a list and stores attribute values
             ArrayList<Double> attributeValues = new ArrayList<>();
@@ -51,7 +80,7 @@ public class BasicNaiveBayes implements Classifier {
         for (DataFound x : allData) {
             System.out.println(x.getData() + " " + x.getClassValue());
         }
-
+         */
     }
 
     @Override

@@ -19,6 +19,7 @@ public class MachineLearningQ2 {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.Exception
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
@@ -38,6 +39,12 @@ public class MachineLearningQ2 {
         
     }
     
+    /**
+     * Reads in the data from the file and returns the instances
+     * 
+     * @param filepath
+     * @return
+     */
     public static Instances getData(String filepath) {
         Instances train = null;
         try {
