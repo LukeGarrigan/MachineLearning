@@ -70,51 +70,60 @@ public class BasicNaiveBayes implements Classifier {
     // This is just a quick test
     public void probabilityCrime() {
         System.out.println("");
+        // creates a deep copy of the List of maps
         ArrayList<Map> crimeCounts = new ArrayList<>();
-        
-        for(Map m : counts){
-            crimeCounts.add(m);
+        for (Map m : counts) {
+            crimeCounts.add(new HashMap(m));
         }
 
-        
         // find which DataFound objects had crime
         ArrayList<DataFound> crime = new ArrayList<>();
         for (DataFound x : df) {
             if (x.getClassValue() == 1) {
-                crime.add(x);
+                crime.add(new DataFound(x));
             }
         }
 
-        // loop through all the Data which had crime and assigns them to a new
-        // arraylist of maps with a decremented amount
-        for (DataFound x : crime) {
-            for (int i = 0; i < crimeCounts.size(); i++) {
-                crimeCounts.get(i).put(x.getAttribute()[i],
-                        (Double) crimeCounts.get(i).get(x.getAttribute()[i]) - 1);
-            }
+        System.out.println("Initial Map");
+        for (Map m : counts) {
+            System.out.println(m);
         }
-        for (Map x : crimeCounts) {
-            System.out.println(x);
+        System.out.println("New Map");
+        for (Map m : crimeCounts) {
+            System.out.println(m);
         }
 
         System.out.println("");
         for (DataFound x : crime) {
             for (int i = 0; i < crimeCounts.size(); i++) {
-                System.out.println((Double) crimeCounts.get(i).get(x.getAttribute()[i]));
-                System.out.println((Double) counts.get(i).get(x.getAttribute()[i]));
-                crimeCounts.get(i).put(x.getAttribute()[i],
-                        (Double) crimeCounts.get(i).get(x.getAttribute()[i]) / (Double) counts.get(i).get(x.getAttribute()[i])
-                );
-
+               crimeCounts.get(i).put(x.getAttribute()[i],
+                        (Double) crimeCounts.get(i).get(x.getAttribute()[i]) -1);
             }
-
         }
-
+        
+        
+        System.out.println("");
+        for (DataFound x : crime) {
+            for (int i = 0; i < crimeCounts.size(); i++) {
+                crimeCounts.get(i).put(x.getAttribute()[i],
+                        (Double) crimeCounts.get(i).get(x.getAttribute()[i])/(Double) counts.get(i).get(x.getAttribute()[i])
+                );
+            }
+        }
+       
         System.out.println();
 
-        for (Map x : crimeCounts) {
-            System.out.println(x);
-        }
+        // Probability of a single parent household with low security living in an urban 
+        // environment being a victim of crime
+        double total = 0;
+
+        System.out.println("");
+        System.out.println("Struct");
+        System.out.println(crimeCounts.get(0));
+        System.out.println("Security");
+        System.out.println(crimeCounts.get(1));
+        System.out.println("Area");
+        System.out.println(crimeCounts.get(2));
 
     }
 

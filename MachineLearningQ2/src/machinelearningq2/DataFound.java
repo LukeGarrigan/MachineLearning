@@ -23,6 +23,10 @@ public class DataFound {
         this.classValue = classValue;
     }
 
+    public DataFound(DataFound another) {
+        this(another.getAttribute(), another.getClassValue());
+    }
+
     public double[] getAttribute() {
         return attribute;
     }
@@ -35,6 +39,5 @@ public class DataFound {
     public String toString() {
         return "DataFound{" + "attribute=" + Arrays.toString(attribute) + ", classValue=" + classValue + '}';
     }
-    
-   
+
 }

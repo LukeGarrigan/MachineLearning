@@ -10,6 +10,7 @@ import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.core.Debug.Random;
+import weka.core.Instance;
 
 /**
  *
@@ -23,29 +24,32 @@ public class MachineLearningQ2 {
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-   
-        
+
         // paths for the training and test data
         String trainingDataPath = "datasets/crime.arff";
         String testDataPath = "datasets/crime.arff";
-        
+
         // creating the instances
         Instances trainingData = getData(trainingDataPath);
         Instances testData = getData(testDataPath);
-        
         // building the classifier
-        BasicNaiveBayes classify = new BasicNaiveBayes();
+        // BasicNaiveBayes classify = new BasicNaiveBayes();
+        //classify.buildClassifier(trainingData);        
+        //classify.probabilityCrime();
+        BasicNaiveBayesV1 classify = new BasicNaiveBayesV1();
         classify.buildClassifier(trainingData);
         
+        // instance for testing 
+        Instance testInstance = testData.get(0);
+        classify.distributionForInstance(testInstance);
         
         
-        classify.probabilityCrime();
         
     }
-    
+
     /**
      * Reads in the data from the file and returns the instances
-     * 
+     *
      * @param filepath
      * @return
      */
@@ -54,7 +58,7 @@ public class MachineLearningQ2 {
         try {
             FileReader reader = new FileReader(filepath);
             train = new Instances(reader);
-
+            
         } catch (Exception e) {
             System.out.println("Exception caught: " + e);
         }
