@@ -60,6 +60,15 @@ public class DataFound2 {
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.attributeValue) ^ (Double.doubleToLongBits(this.attributeValue) >>> 32));
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.classValue) ^ (Double.doubleToLongBits(this.classValue) >>> 32));
+        hash = 97 * hash + this.attributeIndex;
+        return hash;
+    }
+
     public double getConditionalProbability() {
         return conditionalProbability;
     }

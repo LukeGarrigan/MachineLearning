@@ -27,28 +27,24 @@ public class MachineLearningQ2 {
 
         // paths for the training and test data
         String trainingDataPath = "datasets/crime.arff";
-        String testDataPath = "datasets/crime.arff";
+        String testDataPath = "datasets/crimeTest.arff";
 
         // creating the instances
         Instances trainingData = getData(trainingDataPath);
         Instances testData = getData(testDataPath);
-        // building the classifier
-        // BasicNaiveBayes classify = new BasicNaiveBayes();
-        //classify.buildClassifier(trainingData);        
-        //classify.probabilityCrime();
+
+        /* For the basic implementation
         BasicNaiveBayesV1 classify = new BasicNaiveBayesV1();
         classify.buildClassifier(trainingData);
-        
-        
-        
-        NaiveBayes x = new NaiveBayes();
-        
-        // instance for testing 
-        Instance testInstance = testData.get(0);
-        classify.classifyInstance(testInstance);
-        
-        
-        
+        */
+        ExtendedNaiveBayes c = new ExtendedNaiveBayes();
+        c.buildClassifier(trainingData);
+
+        for (Instance inst : testData) {
+            System.out.println("");
+            System.out.println(inst);
+            c.classifyInstance(inst);
+        }
     }
 
     /**
@@ -62,11 +58,11 @@ public class MachineLearningQ2 {
         try {
             FileReader reader = new FileReader(filepath);
             train = new Instances(reader);
-            
+
         } catch (Exception e) {
             System.out.println("Exception caught: " + e);
         }
         return train;
     }
-    
+
 }

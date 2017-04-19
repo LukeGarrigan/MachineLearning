@@ -16,7 +16,7 @@ import weka.core.Instances;
  *
  * @author Luke
  */
-public class BasicNaiveBayesV1 implements Classifier {
+public class ExtendedNaiveBayes implements Classifier {
 
     private int[] classValueCounts;
     private ArrayList<DataFound2> data = new ArrayList<>();
