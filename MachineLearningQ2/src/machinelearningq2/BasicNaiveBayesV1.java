@@ -5,6 +5,7 @@
  */
 package machinelearningq2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import weka.classifiers.Classifier;
 import weka.core.Capabilities;
@@ -17,8 +18,9 @@ import weka.core.Instances;
  */
 public class BasicNaiveBayesV1 implements Classifier {
 
-    double counts[][] = new double[4][4];
-    double condProbs[][] = new double[5][5];
+    int[] classValueCounts = new int[2];
+    ArrayList<DataFound2> data = new ArrayList<>();
+    double countData;
 
     /**
      *
@@ -29,45 +31,49 @@ public class BasicNaiveBayesV1 implements Classifier {
      */
     @Override
     public void buildClassifier(Instances ins) throws Exception {
+        countData = ins.size();
         // assigns the class position of the instance 
         ins.setClassIndex(ins.numAttributes() - 1);
-
+        // store the values
         for (Instance line : ins) {
-            double multipler = line.classValue() + 1;
-            for (int i = 0; i < line.numAttributes()-1; i++) {
+            double classValue = line.classValue();
+            classValueCounts[(int) classValue]++;
+            for (int i = 0; i < line.numAttributes() - 1; i++) {
                 String attributeValue = line.stringValue(i);
-                Integer attribute = new Integer(attributeValue);
-                condProbs[attribute][i]++;
+                Double attribute = new Double(attributeValue);
+                DataFound2 d = new DataFound2(attribute, classValue, i);
+
+                if (!data.contains(d)) {
+                    data.add(d);
+                } else {
+                    for (int j = 0; j < data.size(); j++) {
+                        if (data.get(j).equals(d)) {
+                            data.get(j).incrementCount();
+                        }
+                    }
+                }
             }
         }
-        // printing out the 2D array of counts
-        for (int i = 0; i < condProbs.length; i++) {
-            for (int j = 0; j < condProbs.length; j++) {
-                System.out.print(condProbs[i][j] + " ");
-            }
-            System.out.println("");
+
+        // compute the conditional probabilities
+        System.out.println(data.size());
+
+        for (DataFound2 x : data) {
+            double classValueCount = classValueCounts[(int) x.getClassValue()];
+            x.computeConditionalProbability(classValueCount);
+            System.out.println(x);
         }
+
         System.out.println("");
 
-        // stores the counts in a 2D array
-        for (Instance line : ins) {
-            for (int i = 0; i < line.numAttributes(); i++) {
-                String attributeValue = line.stringValue(i);
-                Integer attribute = new Integer(attributeValue);
-                counts[attribute][i]++;
-            }
-        }
-        // printing out the 2D array of counts
-        for (int i = 0; i < counts.length; i++) {
-            for (int j = 0; j < counts.length; j++) {
-                System.out.print(counts[i][j] + " ");
-            }
-            System.out.println("");
-        }
-        System.out.println("");
+        System.out.println(Arrays.toString(classValueCounts));
+
     }
 
     /**
+     * The method classifyInstance which should call your previous
+     * distributionForInstance method and simply return the prediction as the
+     * class with the largest probability
      *
      * @param instnc
      * @return
@@ -75,7 +81,18 @@ public class BasicNaiveBayesV1 implements Classifier {
      */
     @Override
     public double classifyInstance(Instance instnc) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        double[] bayesCalculations = distributionForInstance(instnc);
+        double largest = 0;
+        double largestIndex = 0;
+
+        for (int i = 0; i < bayesCalculations.length; i++) {
+            if (bayesCalculations[i] > largest) {
+                largest = bayesCalculations[i];
+                largestIndex = i;
+            }
+        }
+        System.out.println("Class Membership: " + largestIndex);
+        return largestIndex;
     }
 
     /**
@@ -94,14 +111,34 @@ public class BasicNaiveBayesV1 implements Classifier {
         System.out.println(instnc + "\n");
         // Step 1: Find the counts for the given value
         System.out.println(instnc.attribute(0).numValues());
-        for (int i = 0; i < instnc.numValues() - 1; i++) {
-            String attributeValue = instnc.stringValue(i);
-            Integer attribute = new Integer(attributeValue);
-            System.out.println(counts[attribute][i]);
 
+        double[] naiveBayes = new double[classValueCounts.length];
+        for (int c = 0; c < naiveBayes.length; c++) {
+            ArrayList<Double> conditionalProbs = new ArrayList<>();
+            double priorProbability = classValueCounts[c] / countData;
+            conditionalProbs.add(priorProbability);
+            for (int i = 0; i < instnc.numValues() - 1; i++) {
+                String attributeValue = instnc.stringValue(i);
+                Integer attribute = new Integer(attributeValue);
+                DataFound2 d = new DataFound2(attribute, c, i);
+                for (int j = 0; j < data.size(); j++) {
+                    if (data.get(j).equals(d)) {
+                        conditionalProbs.add(data.get(j).getConditionalProbability());
+                    }
+                }
+            }
+
+            // compute the naive bayes
+            double total = 1;
+            for (Double x : conditionalProbs) {
+                total *= x;
+            }
+            naiveBayes[c] = total;
+            //System.out.println(total);
+            //System.out.println(conditionalProbs);
         }
-
-        return null;
+        prettyPrintProbabilities(naiveBayes);
+        return naiveBayes;
     }
 
     /**
@@ -111,6 +148,13 @@ public class BasicNaiveBayesV1 implements Classifier {
     @Override
     public Capabilities getCapabilities() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    public void prettyPrintProbabilities(double[] x){
+        System.out.println(Arrays.toString(x));
+        
+        
     }
 
 }

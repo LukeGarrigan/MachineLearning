@@ -39,9 +39,13 @@ public class MachineLearningQ2 {
         BasicNaiveBayesV1 classify = new BasicNaiveBayesV1();
         classify.buildClassifier(trainingData);
         
+        
+        
+        NaiveBayes x = new NaiveBayes();
+        
         // instance for testing 
         Instance testInstance = testData.get(0);
-        classify.distributionForInstance(testInstance);
+        classify.classifyInstance(testInstance);
         
         
         
