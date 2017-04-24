@@ -5,37 +5,24 @@
  */
 package machinelearningq2;
 
-/**
- *
- * @author Luke
- */
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.util.Comparator;
 
 /**
  *
  * @author Luke
  */
-public class DataFound2 {
+public class DataFound {
 
     private double attributeValue;
     private double classValue;
     private int attributeIndex;
     private int counts = 1;
     private double conditionalProbability;
-    private double mean;
-    private double variance;
     
-    public DataFound2(double attributeValue, double classValue, int attributeIndex, double mean, double variance) {
+    public DataFound(double attributeValue, double classValue, int attributeIndex) {
         this.attributeValue = attributeValue;
         this.classValue = classValue;
         this.attributeIndex = attributeIndex;
-        this.mean = mean;
-        this.variance = variance;
     }
 
     public double getAttributeValue() {

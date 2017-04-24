@@ -19,7 +19,7 @@ import weka.core.Instances;
 public class BasicNaiveBayesV1 implements Classifier {
 
     private int[] classValueCounts;
-    private ArrayList<DataFound2> data = new ArrayList<>();
+    private ArrayList<DataFound> data = new ArrayList<>();
     private double countData;
 
     /**
@@ -41,9 +41,8 @@ public class BasicNaiveBayesV1 implements Classifier {
             double classValue = line.classValue();
             classValueCounts[(int) classValue]++;
             for (int i = 0; i < line.numAttributes() - 1; i++) {
-                String attributeValue = line.stringValue(i);
-                Double attribute = new Double(attributeValue);
-                DataFound2 d = new DataFound2(attribute, classValue, i);
+                double attributeValue = line.value(i);
+                DataFound d = new DataFound(attributeValue, classValue, i);
 
                 int index = data.indexOf(d);
                 // then it doesn't exist
@@ -58,7 +57,7 @@ public class BasicNaiveBayesV1 implements Classifier {
         // compute the conditional probabilities
         System.out.println(data.size());
 
-        for (DataFound2 x : data) {
+        for (DataFound x : data) {
             double classValueCount = classValueCounts[(int) x.getClassValue()];
             x.computeConditionalProbability(classValueCount);
             System.out.println(x);
@@ -120,9 +119,8 @@ public class BasicNaiveBayesV1 implements Classifier {
             double priorProbability = classValueCounts[c] / countData;
             conditionalProbs.add(priorProbability);
             for (int i = 0; i < instnc.numValues() - 1; i++) {
-                String attributeValue = instnc.stringValue(i);
-                Integer attribute = new Integer(attributeValue);
-                DataFound2 d = new DataFound2(attribute, c, i);
+                double attributeValue = instnc.value(i);
+                DataFound d = new DataFound(attributeValue, c, i);
 
                 int index = data.indexOf(d);
                 if (index != -1) {

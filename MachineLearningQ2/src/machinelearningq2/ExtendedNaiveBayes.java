@@ -19,8 +19,11 @@ import weka.core.Instances;
 public class ExtendedNaiveBayes implements Classifier {
 
     private int[] classValueCounts;
-    private ArrayList<DataFound2> data = new ArrayList<>();
+    private double classMeans;
+    private ArrayList<DataFound> data = new ArrayList<>();
     private double countData;
+
+    private ArrayList<Double> classVariance = new ArrayList<>();
 
     /**
      *
@@ -36,14 +39,15 @@ public class ExtendedNaiveBayes implements Classifier {
         // assigns the class position of the instance 
         ins.setClassIndex(ins.numAttributes() - 1);
         classValueCounts = new int[ins.numClasses()];
+
         // store the values
         for (Instance line : ins) {
             double classValue = line.classValue();
             classValueCounts[(int) classValue]++;
             for (int i = 0; i < line.numAttributes() - 1; i++) {
-                String attributeValue = line.stringValue(i);
-                Double attribute = new Double(attributeValue);
-                DataFound2 d = new DataFound2(attribute, classValue, i);
+                double attributeValue = line.value(i);
+                classMeans[(int) classValue] += attributeValue;
+                DataFound2 d = new DataFound2(attributeValue, classValue, i);
 
                 int index = data.indexOf(d);
                 // then it doesn't exist
@@ -55,18 +59,18 @@ public class ExtendedNaiveBayes implements Classifier {
             }
         }
 
-        // compute the conditional probabilities
-        System.out.println(data.size());
+   
+        System.out.println("Class Means: " + Arrays.toString(classMeans));
 
-        for (DataFound2 x : data) {
+        for (DataFound x : data) {
             double classValueCount = classValueCounts[(int) x.getClassValue()];
             x.computeConditionalProbability(classValueCount);
-            System.out.println(x);
+            //System.out.println(x);
         }
 
         System.out.println("");
 
-        System.out.println(Arrays.toString(classValueCounts));
+        System.out.println("Class Value Counts: " + Arrays.toString(classValueCounts));
 
     }
 
@@ -120,9 +124,8 @@ public class ExtendedNaiveBayes implements Classifier {
             double priorProbability = classValueCounts[c] / countData;
             conditionalProbs.add(priorProbability);
             for (int i = 0; i < instnc.numValues() - 1; i++) {
-                String attributeValue = instnc.stringValue(i);
-                Integer attribute = new Integer(attributeValue);
-                DataFound2 d = new DataFound2(attribute, c, i);
+                double attributeValue = instnc.value(i);
+                DataFound d = new DataFound(attributeValue, c, i);
 
                 int index = data.indexOf(d);
                 if (index != -1) {

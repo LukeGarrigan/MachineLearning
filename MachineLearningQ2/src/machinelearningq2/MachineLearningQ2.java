@@ -26,7 +26,7 @@ public class MachineLearningQ2 {
         // TODO code application logic here
 
         // paths for the training and test data
-        String trainingDataPath = "datasets/crime.arff";
+        String trainingDataPath = "datasets/banana/banana-train.arff";
         String testDataPath = "datasets/crimeTest.arff";
 
         // creating the instances
@@ -40,11 +40,13 @@ public class MachineLearningQ2 {
         ExtendedNaiveBayes c = new ExtendedNaiveBayes();
         c.buildClassifier(trainingData);
 
+        /*
         for (Instance inst : testData) {
             System.out.println("");
             System.out.println(inst);
             c.classifyInstance(inst);
         }
+        */
     }
 
     /**
