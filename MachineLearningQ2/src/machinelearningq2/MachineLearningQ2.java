@@ -26,8 +26,8 @@ public class MachineLearningQ2 {
         // TODO code application logic here
 
         // paths for the training and test data
-        String trainingDataPath = "datasets/banana/banana-train.arff";
-        String testDataPath = "datasets/crimeTest.arff";
+        String trainingDataPath = "datasets/magic/magic-train.arff";
+        String testDataPath = "datasets/magic/magic-test.arff";
 
         // creating the instances
         Instances trainingData = getData(trainingDataPath);
@@ -36,17 +36,21 @@ public class MachineLearningQ2 {
         /* For the basic implementation
         BasicNaiveBayesV1 classify = new BasicNaiveBayesV1();
         classify.buildClassifier(trainingData);
-        */
+         */
         ExtendedNaiveBayes c = new ExtendedNaiveBayes();
         c.buildClassifier(trainingData);
 
-        /*
+        // for (int i = 0; i < 3; i++) {
+        //      System.out.println("");
+        //     c.distributionForInstance(testData.get(i));
+        //  }
+        testData.setClassIndex(testData.numAttributes() - 1);
         for (Instance inst : testData) {
-            System.out.println("");
-            System.out.println(inst);
             c.classifyInstance(inst);
         }
-        */
+
+        c.getAccuracy();
+
     }
 
     /**

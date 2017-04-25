@@ -19,11 +19,14 @@ import weka.core.Instances;
 public class ExtendedNaiveBayes implements Classifier {
 
     private int[] classValueCounts;
-    private double classMeans;
+
+    private double[][] attributeMeans;
+    private double[][] attributeVariance;
     private ArrayList<DataFound> data = new ArrayList<>();
     private double countData;
 
-    private ArrayList<Double> classVariance = new ArrayList<>();
+    private double testCount = 0;
+    private double correctCount = 0;
 
     /**
      *
@@ -39,15 +42,17 @@ public class ExtendedNaiveBayes implements Classifier {
         // assigns the class position of the instance 
         ins.setClassIndex(ins.numAttributes() - 1);
         classValueCounts = new int[ins.numClasses()];
-
+        attributeMeans = new double[ins.numClasses()][ins.numAttributes() - 1];
+        //attributeMeans = new double[ins.numAttributes() - 1];
+        attributeVariance = new double[ins.numClasses()][ins.numAttributes() - 1];
         // store the values
         for (Instance line : ins) {
             double classValue = line.classValue();
             classValueCounts[(int) classValue]++;
             for (int i = 0; i < line.numAttributes() - 1; i++) {
                 double attributeValue = line.value(i);
-                classMeans[(int) classValue] += attributeValue;
-                DataFound2 d = new DataFound2(attributeValue, classValue, i);
+                attributeMeans[(int) classValue][i] += attributeValue;
+                DataFound d = new DataFound(attributeValue, classValue, i);
 
                 int index = data.indexOf(d);
                 // then it doesn't exist
@@ -58,20 +63,31 @@ public class ExtendedNaiveBayes implements Classifier {
                 }
             }
         }
-
-   
-        System.out.println("Class Means: " + Arrays.toString(classMeans));
-
-        for (DataFound x : data) {
-            double classValueCount = classValueCounts[(int) x.getClassValue()];
-            x.computeConditionalProbability(classValueCount);
-            //System.out.println(x);
+        System.out.println("Attribute Totals: " + Arrays.deepToString(attributeMeans));
+        // computes the means
+        System.out.println(Arrays.toString(classValueCounts));
+        for (int j = 0; j < classValueCounts.length; j++) {
+            for (int i = 0; i < attributeMeans.length; i++) {
+                attributeMeans[j][i] = attributeMeans[j][i] / classValueCounts[j];
+            }
         }
 
-        System.out.println("");
-
-        System.out.println("Class Value Counts: " + Arrays.toString(classValueCounts));
-
+        // calculate the variance
+        for (int i = 0; i < data.size(); i++) {
+            double cv = data.get(i).getClassValue();
+            double atIn = data.get(i).getAttributeIndex();
+            double squareDifference = Math.pow(data.get(i).getAttributeValue() - attributeMeans[(int) cv][(int) atIn], 2);
+            attributeVariance[(int) cv][(int) atIn] += squareDifference;
+        }
+        for (int j = 0; j < classValueCounts.length; j++) {
+            for (int i = 0; i < attributeVariance.length; i++) {
+                attributeVariance[j][i] = attributeVariance[j][i] / (classValueCounts[j]);
+                // to get the variance from the std
+                attributeVariance[j][i] = Math.sqrt(attributeVariance[j][i]);
+            }
+        }
+        System.out.println("Attribute Means: " + Arrays.deepToString(attributeMeans));
+        System.out.println("Variance: " + Arrays.deepToString(attributeVariance));
     }
 
     /**
@@ -85,6 +101,8 @@ public class ExtendedNaiveBayes implements Classifier {
      */
     @Override
     public double classifyInstance(Instance instnc) throws Exception {
+        testCount++;
+        double actualClassValue = instnc.classValue();
         double[] bayesCalculations = distributionForInstance(instnc);
         double largest = 0;
         double largestIndex = 0;
@@ -95,7 +113,11 @@ public class ExtendedNaiveBayes implements Classifier {
                 largestIndex = i;
             }
         }
-        System.out.println("Class Membership: " + largestIndex);
+        if (largestIndex == actualClassValue) {
+            correctCount++;
+        }
+
+        // System.out.println("Class Membership: " + largestIndex);
         return largestIndex;
     }
 
@@ -112,36 +134,30 @@ public class ExtendedNaiveBayes implements Classifier {
     public double[] distributionForInstance(Instance instnc) throws Exception {
 
         // creates a double array for storing the naive calculations for each class
-        double[] naiveBayes = new double[classValueCounts.length];
-
-        // loops through each class and computes the naive bayes 
-        for (int c = 0; c < naiveBayes.length; c++) {
-
-            // stores all conditional probabilities for class membership such:
-            // P(struct=0|crime=1), P(security=1|crime=1), P(area=1|crime=1)
-            // and also it stores the prior probability: P(crime=1)
-            ArrayList<Double> conditionalProbs = new ArrayList<>();
+        double[] prediction = new double[classValueCounts.length];
+        for (int c = 0; c < classValueCounts.length; c++) {
+            ArrayList<Double> likelihoods = new ArrayList<>();
             double priorProbability = classValueCounts[c] / countData;
-            conditionalProbs.add(priorProbability);
-            for (int i = 0; i < instnc.numValues() - 1; i++) {
+            likelihoods.add(priorProbability);
+            for (int i = 0; i < instnc.numAttributes() - 1; i++) {
+                double currentMean = attributeMeans[c][i];
+                double currentVariance = attributeVariance[c][i];
                 double attributeValue = instnc.value(i);
-                DataFound d = new DataFound(attributeValue, c, i);
+                double likelihood1 = 1 / (Math.sqrt(2 * Math.PI)) * currentVariance;
+                double likelihood2 = likelihood1 * Math.exp(-Math.pow((attributeValue - currentMean), 2)
+                        / (2 * Math.pow(currentVariance, 2)));
 
-                int index = data.indexOf(d);
-                if (index != -1) {
-                    conditionalProbs.add(data.get(index).getConditionalProbability());
-                }
+                likelihoods.add(likelihood2);
             }
-            System.out.println(conditionalProbs);
-            // compute the naive bayes
+            // System.out.println(likelihoods);
             double total = 1;
-            for (Double x : conditionalProbs) {
+            for (Double x : likelihoods) {
                 total *= x;
             }
-            naiveBayes[c] = total;
+            prediction[c] = total;
+
         }
-        prettyPrintProbabilities(naiveBayes);
-        return naiveBayes;
+        return prediction;
     }
 
     /**
@@ -167,4 +183,7 @@ public class ExtendedNaiveBayes implements Classifier {
 
     }
 
+    public void getAccuracy() {
+        System.out.println((correctCount / testCount) * 100);
+    }
 }

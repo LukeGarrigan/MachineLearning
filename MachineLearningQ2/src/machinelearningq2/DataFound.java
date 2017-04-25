@@ -18,7 +18,9 @@ public class DataFound {
     private int attributeIndex;
     private int counts = 1;
     private double conditionalProbability;
-    
+
+    private double likelihood;
+
     public DataFound(double attributeValue, double classValue, int attributeIndex) {
         this.attributeValue = attributeValue;
         this.classValue = classValue;
@@ -41,23 +43,28 @@ public class DataFound {
         return counts;
     }
 
-    public void incrementCount(){
+    public void incrementCount() {
         this.counts++;
     }
+
     public boolean equals(Object o) {
         if (o instanceof DataFound) {
             DataFound temp = (DataFound) o;
             if (this.attributeValue != temp.getAttributeValue()) {
                 return false;
             }
-            if(this.attributeIndex != temp.getAttributeIndex()){
+            if (this.attributeIndex != temp.getAttributeIndex()) {
                 return false;
             }
-            if(this.classValue != temp.getClassValue()){
+            if (this.classValue != temp.getClassValue()) {
                 return false;
             }
         }
         return true;
+    }
+
+    public double getLikelihood() {
+        return likelihood;
     }
 
     @Override
@@ -73,18 +80,20 @@ public class DataFound {
         return conditionalProbability;
     }
 
-    
-    public void computeConditionalProbability(double priorCount){
-        this.conditionalProbability = counts/priorCount;
+    public void computeLikelihood(double mean, double variance) {
+        this.likelihood = Math.pow((1 / Math.sqrt(2 * Math.PI) * variance),
+                (-((attributeValue - mean) * (attributeValue - mean)) / 2
+                * (variance * variance)));
+
+    }
+
+    public void computeConditionalProbability(double priorCount) {
+        this.conditionalProbability = counts / priorCount;
     }
 
     @Override
     public String toString() {
         return "DataFound2{" + "attributeValue=" + attributeValue + ", classValue=" + classValue + ", attributeIndex=" + attributeIndex + ", counts=" + counts + ", conditionalProbability=" + conditionalProbability + '}';
     }
-   
-    
-    
-    
-    
+
 }
