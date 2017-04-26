@@ -6,6 +6,7 @@
 package machinelearningq2;
 
 import java.io.FileReader;
+import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import weka.classifiers.bayes.NaiveBayes;
@@ -26,30 +27,34 @@ public class MachineLearningQ2 {
         // TODO code application logic here
 
         // paths for the training and test data
-        String trainingDataPath = "datasets/magic/magic-train.arff";
-        String testDataPath = "datasets/magic/magic-test.arff";
+        String trainingDataPath = "datasets/diabetes/diabetes-train.arff";
+        String testDataPath = "datasets/diabetes/diabetes-test.arff";
 
         // creating the instances
         Instances trainingData = getData(trainingDataPath);
         Instances testData = getData(testDataPath);
 
-        /* For the basic implementation
-        BasicNaiveBayesV1 classify = new BasicNaiveBayesV1();
-        classify.buildClassifier(trainingData);
-         */
         ExtendedNaiveBayes c = new ExtendedNaiveBayes();
         c.buildClassifier(trainingData);
 
-        // for (int i = 0; i < 3; i++) {
-        //      System.out.println("");
-        //     c.distributionForInstance(testData.get(i));
-        //  }
         testData.setClassIndex(testData.numAttributes() - 1);
         for (Instance inst : testData) {
             c.classifyInstance(inst);
         }
 
         c.getAccuracy();
+
+        // train NaiveBayes
+        Classifier cModel = (Classifier) new NaiveBayes();
+        cModel.buildClassifier(trainingData);
+
+        // Test the model
+        Evaluation eTest = new Evaluation(trainingData);
+        eTest.evaluateModel(cModel, testData);
+
+        // Print the result à la Weka explorer:
+        String strSummary = eTest.toSummaryString();
+        System.out.println(strSummary);
 
     }
 

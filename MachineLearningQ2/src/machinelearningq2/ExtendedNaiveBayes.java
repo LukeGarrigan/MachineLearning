@@ -5,6 +5,7 @@
  */
 package machinelearningq2;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import weka.classifiers.Classifier;
@@ -43,7 +44,6 @@ public class ExtendedNaiveBayes implements Classifier {
         ins.setClassIndex(ins.numAttributes() - 1);
         classValueCounts = new int[ins.numClasses()];
         attributeMeans = new double[ins.numClasses()][ins.numAttributes() - 1];
-        //attributeMeans = new double[ins.numAttributes() - 1];
         attributeVariance = new double[ins.numClasses()][ins.numAttributes() - 1];
         // store the values
         for (Instance line : ins) {
@@ -67,7 +67,7 @@ public class ExtendedNaiveBayes implements Classifier {
         // computes the means
         System.out.println(Arrays.toString(classValueCounts));
         for (int j = 0; j < classValueCounts.length; j++) {
-            for (int i = 0; i < attributeMeans.length; i++) {
+            for (int i = 0; i < ins.numAttributes()-1; i++) {
                 attributeMeans[j][i] = attributeMeans[j][i] / classValueCounts[j];
             }
         }
@@ -80,8 +80,8 @@ public class ExtendedNaiveBayes implements Classifier {
             attributeVariance[(int) cv][(int) atIn] += squareDifference;
         }
         for (int j = 0; j < classValueCounts.length; j++) {
-            for (int i = 0; i < attributeVariance.length; i++) {
-                attributeVariance[j][i] = attributeVariance[j][i] / (classValueCounts[j]);
+            for (int i = 0; i < ins.numAttributes()-1; i++) {
+                attributeVariance[j][i] = attributeVariance[j][i] / (classValueCounts[j] - 1);
                 // to get the variance from the std
                 attributeVariance[j][i] = Math.sqrt(attributeVariance[j][i]);
             }
@@ -143,13 +143,12 @@ public class ExtendedNaiveBayes implements Classifier {
                 double currentMean = attributeMeans[c][i];
                 double currentVariance = attributeVariance[c][i];
                 double attributeValue = instnc.value(i);
-                double likelihood1 = 1 / (Math.sqrt(2 * Math.PI)) * currentVariance;
-                double likelihood2 = likelihood1 * Math.exp(-Math.pow((attributeValue - currentMean), 2)
-                        / (2 * Math.pow(currentVariance, 2)));
 
-                likelihoods.add(likelihood2);
+                double likelihood = 1 / (Math.sqrt(2 * Math.PI) * currentVariance)
+                        * Math.exp(-Math.pow(attributeValue - currentMean, 2)
+                                / (2 * Math.pow(currentVariance, 2)));
+                likelihoods.add(likelihood);
             }
-            // System.out.println(likelihoods);
             double total = 1;
             for (Double x : likelihoods) {
                 total *= x;
@@ -184,6 +183,8 @@ public class ExtendedNaiveBayes implements Classifier {
     }
 
     public void getAccuracy() {
-        System.out.println((correctCount / testCount) * 100);
+        double percent = (correctCount / testCount) * 100;
+        DecimalFormat df = new DecimalFormat("#.####");
+        System.out.print(df.format(percent) + " %");
     }
 }
