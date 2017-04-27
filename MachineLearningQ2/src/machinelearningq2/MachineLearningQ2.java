@@ -27,13 +27,20 @@ public class MachineLearningQ2 {
         // TODO code application logic here
 
         // paths for the training and test data
-        String trainingDataPath = "datasets/diabetes/diabetes-train.arff";
-        String testDataPath = "datasets/diabetes/diabetes-test.arff";
+        String trainingDataPath = "datasets/crime.arff";
+        String testDataPath = "datasets/crimeTest.arff";
 
         // creating the instances
         Instances trainingData = getData(trainingDataPath);
         Instances testData = getData(testDataPath);
 
+        BasicNaiveBayesV1 b = new BasicNaiveBayesV1();
+        b.buildClassifier(trainingData);
+        for (Instance x : testData) {
+            System.out.println(b.classifyInstance(x));
+        }
+
+        /*
         ExtendedNaiveBayes c = new ExtendedNaiveBayes();
         c.buildClassifier(trainingData);
 
@@ -49,13 +56,12 @@ public class MachineLearningQ2 {
         cModel.buildClassifier(trainingData);
 
         // Test the model
-        Evaluation eTest = new Evaluation(trainingData);
-        eTest.evaluateModel(cModel, testData);
-
+        //Evaluation eTest = new Evaluation(trainingData);
+        ///eTest.evaluateModel(cModel, testData);
         // Print the result à la Weka explorer:
         String strSummary = eTest.toSummaryString();
         System.out.println(strSummary);
-
+         */
     }
 
     /**
