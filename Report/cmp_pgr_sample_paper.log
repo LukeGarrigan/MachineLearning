@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.3)  27 APR 2017 20:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.3)  29 APR 2017 18:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -60,7 +60,11 @@ Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(./cmp_pgr_sample_paper.aux)
+(./cmp_pgr_sample_paper.aux
+
+LaTeX Warning: Label `tab:example' multiply defined.
+
+)
 \openout1 = `cmp_pgr_sample_paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
@@ -76,8 +80,7 @@ LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
 LaTeX Font Info:    ... okay on input line 22.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 22.
-
-(c:/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+ (c:/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 (c:/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -152,75 +155,101 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 25.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 31.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 32.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 35.
+(Font)              <9> on input line 39.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 35.
+(Font)              <6> on input line 39.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 35.
-LaTeX Font Info:    Try loading font information for OMS+pcr on input line 35.
+(Font)              <5> on input line 39.
 
-(c:/texlive/2016/texmf-dist/tex/latex/psnfss/omspcr.fd
-File: omspcr.fd 
-)
-LaTeX Font Info:    Font shape `OMS/pcr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 35.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 54.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \vbox (badness 8019) has occurred while \output is active []
+
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 85.
 
 (c:/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 85.
 
 <sparam_1_errors.png, id=1, 539.616pt x 404.712pt>
 File: sparam_1_errors.png Graphic file (type png)
  <use sparam_1_errors.png>
-Package pdftex.def Info: sparam_1_errors.png used on input line 70.
+Package pdftex.def Info: sparam_1_errors.png used on input line 101.
 (pdftex.def)             Requested size: 215.84258pt x 161.88193pt.
-
-<AVTTS-Overview.png, id=2, 805.0075pt x 241.90375pt>
-File: AVTTS-Overview.png Graphic file (type png)
- <use AVTTS-Overview.png>
-Package pdftex.def Info: AVTTS-Overview.png used on input line 79.
-(pdftex.def)             Requested size: 402.50278pt x 120.95157pt.
 
 [1{c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
- <./sparam_1_errors.png (PNG copy)>]
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+]
+<AVTTS-Overview.png, id=14, 805.0075pt x 241.90375pt>
+File: AVTTS-Overview.png Graphic file (type png)
+ <use AVTTS-Overview.png>
+Package pdftex.def Info: AVTTS-Overview.png used on input line 110.
+(pdftex.def)             Requested size: 402.50278pt x 120.95157pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
 \OT1/ptm/m/n/9 Hyperlinks should be writ-ten in full, e.g.,
  []
 
 
-Underfull \hbox (badness 6775) in paragraph at lines 132--133
+Underfull \hbox (badness 6775) in paragraph at lines 163--164
 \OT1/pcr/m/n/9 http://www.cmp.uea.ac.uk\OT1/ptm/m/n/9 , and must be coloured
  []
 
-(./cmp_pgr_sample_paper.bbl) [2 <./AVTTS-Overview.png>]
-(./cmp_pgr_sample_paper.aux) ) 
+
+LaTeX Warning: Citation `massaro98:perceiving' on page 2 undefined on input lin
+e 175.
+
+
+LaTeX Warning: Citation `theobald04:specomm' on page 2 undefined on input line 
+175.
+
+
+LaTeX Warning: Citation `theobald08:lips' on page 2 undefined on input line 175
+.
+
+
+LaTeX Warning: Citation `cox08:avsp' on page 2 undefined on input line 175.
+
+
+LaTeX Warning: Citation `matthews2002:extraction' on page 2 undefined on input 
+line 175.
+
+(./cmp_pgr_sample_paper.bbl) [2 <./sparam_1_errors.png (PNG copy)>] [3 <./AVTTS
+-Overview.png>] (./cmp_pgr_sample_paper.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 1653 strings out of 493013
- 23769 string characters out of 6136993
- 85881 words of memory out of 5000000
- 5175 multiletter control sequences out of 15000+600000
+ 1639 strings out of 493013
+ 23538 string characters out of 6136993
+ 88969 words of memory out of 5000000
+ 5164 multiletter control sequences out of 15000+600000
  19486 words of font info for 39 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,7n,25p,715b,220s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/
-8r.enc}<c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:/texlive/2016/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:/texlive/2016/texmf-dist/fonts/t
-ype1/urw/courier/ucrr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/u
-tmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texl
-ive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cmp_pgr_sample_paper.pdf (2 pages, 125412 bytes).
+ 40i,7n,25p,1075b,220s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2016/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2016/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmsy9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
+<c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2016/t
+exmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2016/texmf-dist/fonts/ty
+pe1/urw/times/utmri8a.pfb>
+Output written on cmp_pgr_sample_paper.pdf (3 pages, 124366 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 51 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

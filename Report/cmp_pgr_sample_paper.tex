@@ -10,7 +10,7 @@
 \usepackage[pdftex]{graphicx}
 \graphicspath{{figures/}}
 
-\title{Algorithm X is better than Y when classify Z data 2017 --- Norwich, UK}
+\title{Probabilistic approach over Decision Trees for problems with discrete data with a small number of instances 2017 --- Norwich, UK}
 \name{Luke M. Garrigan}
 \institution{
 	Machine Learning, University of East Anglia, UK
@@ -24,19 +24,50 @@
 
 \begin{abstract}
 
-This is the paper layout specification and template definition for the 2009 CMP Research Day. You should submit either an 8 or 4 page paper according to your choice made the end of August. Following your abstract, you should include a list of keywords relating to the subject in your paper --- these should appear as a comma separated list, as in the examples below. You have to submit it in latex, if you are not tex compliant use this template and get some help!
+Bayesian classifiers are widely known for their optimality when attributes are independent given the class. This paper attempts to prove that small samples of discrete data with arbitrary dependencies are more accurately classified using a probabilistic approach over decision trees. 
+
 
 \end{abstract}
 
-\keywords{Relevant topics, list here, makes searching easier}
+\keywords{Probabilistic, Naive Bayes, Decision Trees}
 
 \section{Introduction}
 
-This paper template can be found on the CMP website (\texttt{  }), with  the \LaTeX\ source and the style file you should use to generate your paper. To ensure consistency in the presentation of the proceedings, all authors are required to typeset their document using \LaTeX, and use the research day style file, as follows: \texttt{$\backslash$documentclass\{cmppgr\}}. You should be the first author on this paper. You should discuss co-authors with your supervisor. {\bf Do not put anyone down as a co-author without their express permission}, even if this is a reworking of an existing paper. Compile this with pdflatex.
+In machine learning a learner algorithm is given a set of training instances with their corresponding class labels, it then produces a classifier. The classifier takes unlabelled testing instances and assigns it to a class. Choosing the best suited algorithm specific to the sample set is not a trivial process. 
 
-\section{Page layout and style}
+Probabilistic classification is the application of approximating a joint distribution with a product distribution. Bayes rule is used to approximate the conditional probability of a given class label. Approaches such as \textit{naive} Bayes are among the most popular classifiers used in the machine learning community, derived from generative probability models they are generally easy to understand and the induction of these classifiers is extremely fast, requiring only a single pass through the data if all attributes are discrete \cite{kohavi1996scaling}. The \textit{naive} Bayes classifier is the simplest of models in this paper, it assumes that all attributes are independent of each other given the context of the class. Although the \textit{naive} assumption of independence is not true in terms of most sample sets, many papers such as \cite{domingos1997optimality} have proven that \textit{naive} Bayes classification accuracy is very competitive when compared with more complex state-of-the-art algorithms. 
+$$ P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)} $$
+ 
 
-This document includes examples of all of the likely environments authors will require in their papers. You are strongly encouraged to compare your document with this reference example. Submissions that do not match the formatting laid out here will be returned to the submitting author for correction.
+Decision trees classify instances by sorting them down the tree from the root to some leaf node which represents the classification of the given instance. Nodes specify a test of some attribute of the instance and each branch from that node corresponds to one of the possible values for this attribute. A given instance is classified moving down the tree, the attribute specific to that node is tested. Following down the branch corresponding to the value of the attribute in the given example, this is then repeated until a leaf node is reached and a classification is made.
+
+ 
+
+
+\section{Data Description}
+\begin{table}[h]
+	\centering
+	\caption{An example table.}
+	\begin{tabular}{|l|c|c|}
+		\hline
+		Data Set & Instances & Attributes \\\hline\hline
+		Breast Cancer & 284 & 10\\
+		Ecoli & 223 &10 \\
+		Glass & 141 &6  \\
+		Haberman & 203  &4 \\
+		Hayes Roth & 158 &5 \\
+		Heart & 169 & 14\\
+		Lymphography & 156 &19 \\
+		Promoters & 104 &58  \\
+		Shuttle Landing & 252  &7 \\
+		Sonar & 137 &61 \\
+		Thyroid & 142 & 6\\\hline
+	\end{tabular}
+	\label{tab:example}
+\end{table}
+
+
+
 
 \subsection{Sections}
 
