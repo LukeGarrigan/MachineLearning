@@ -10,6 +10,13 @@
 \usepackage[pdftex]{graphicx}
 \graphicspath{{figures/}}
 
+\input{t1pcr.fd}
+\makeatother
+\setlength{\footnotesep}{3ex}
+\usepackage{listings}
+\usepackage{pgfplots}
+
+
 \title{Probabilistic approach over Decision Trees for problems with discrete data with a small number of instances 2017 --- Norwich, UK}
 \name{Luke M. Garrigan}
 \institution{
@@ -45,12 +52,43 @@ Decision trees classify instances by sorting them down the tree from the root to
 
 
 \section{Data Description}
+
+\subsection{Discretization}
+Discretization concerns with the process of transferring continuous data into discrete counterparts. Numeric attributes were discretized into ten equal-length intervals, unless the number of uniquely observed values for an attribute was less than 10. This approach was compared in \cite{dougherty1995supervised} with entropy-based and purity-based methods, which are supervised algorithms. An empirical evaluation showed that the \textit{naive} Bayes algorithm significantly improved accuracy when features were discretized using an entropy-based method. However due to its simplicity the unsupervised binning discretization method was used.
+
+\subsection{Methods For Accuracy Estimation}
+
+
+
+
+
+
+
+\subsubsection{K-Fold Cross-Validation}
+Cross-validation is a computationally expensive algorithm used to estimate performance, it uses all available instances as both training and testing sets. The dataset is split into $k$ equally sized non-overlapping subsets $S$. Given a fold $S_i$ a model is trained on $S \setminus S_i$, then $S_i$ is used to create the accuracy estimation.
+
+\subsubsection{Leave-One-Out Cross-Validation (LOOCV)}
+Leave-One-Out Cross-Validation is  K-fold cross validation where $K$ is equal to the number of instances in the dataset. The classifier is trained on all data expect the one instance being left out and the prediction is made. An average of the data is collected and used to evaluate the classifier. 
+
+\subsubsection{Bias And Variance Tradeoff}
+As $k$ increases the less bias the classification is in overestimating the true expected error because the folds will be closer to the total dataset. However in doing this it induces a significant amount of variance. To minimise the testing bias a large portion of the dataset must be used for training, meaning not much data is used for testing, this ensures that the model will be as close as possible to the the one that would be achieved from training using the entire dataset. Minimising the testing variance would mean quite the opposite, so a large amount of data would be used for testing, this ensures a more reliable estimate of error of the classifier.
+
+ 
+
+Due to the small sample sizes 10-fold cross-validation was used as an estimator in an attempt to minimise the estimation variance.
+
+
 \begin{table}[h]
 	\centering
 	\caption{An example table.}
 	\begin{tabular}{|l|c|c|}
 		\hline
 		Data Set & Instances & Attributes \\\hline\hline
+		Echo cardiogram & 131 & 13\\
+		Teaching Assistant & 150 & 6\\
+		Seeds & 209 & 8\\
+		Planning Relax & 180 & 13\\
+	    Hepatitis & 154 & 20\\
 		Breast Cancer & 284 & 10\\
 		Ecoli & 223 &10 \\
 		Glass & 141 &6  \\

@@ -18,45 +18,45 @@ Warning--I didn't find a database entry for "matthews2002:extraction"
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 
 Done.
-You've used 2 entries,
+You've used 3 entries,
             4087 wiz_defined-function locations,
-            842 strings with 7704 characters,
-and the built_in function-call counts, 1893 in all, are:
-= -- 152
-> -- 29
-< -- 21
-+ -- 18
-- -- 3
-* -- 102
-:= -- 290
-add.period$ -- 5
-call.type$ -- 2
-change.case$ -- 2
-chr.to.int$ -- 48
-cite$ -- 2
-duplicate$ -- 123
-empty$ -- 143
-format.name$ -- 4
-if$ -- 426
+            849 strings with 7937 characters,
+and the built_in function-call counts, 2882 in all, are:
+= -- 229
+> -- 53
+< -- 31
++ -- 32
+- -- 7
+* -- 149
+:= -- 424
+add.period$ -- 7
+call.type$ -- 3
+change.case$ -- 3
+chr.to.int$ -- 72
+cite$ -- 3
+duplicate$ -- 191
+empty$ -- 227
+format.name$ -- 9
+if$ -- 663
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 18
-newline$ -- 29
-num.names$ -- 2
-pop$ -- 33
+int.to.str$ -- 3
+missing$ -- 30
+newline$ -- 32
+num.names$ -- 3
+pop$ -- 60
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 144
+skip$ -- 222
 stack$ -- 0
-substring$ -- 114
-swap$ -- 110
-text.length$ -- 5
+substring$ -- 171
+swap$ -- 168
+text.length$ -- 7
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 2
+type$ -- 3
 warning$ -- 0
-while$ -- 10
-width$ -- 3
-write$ -- 43
+while$ -- 15
+width$ -- 4
+write$ -- 53
 (There were 5 warnings)

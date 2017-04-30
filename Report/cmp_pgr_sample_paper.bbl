@@ -31,4 +31,10 @@ P.~Domingos and M.~Pazzani, ``On the optimality of the simple bayesian
   classifier under zero-one loss,'' \emph{Machine learning}, vol.~29, no.~2,
   pp. 103--130, 1997.
 
+\bibitem{dougherty1995supervised}
+J.~Dougherty, R.~Kohavi, M.~Sahami \emph{et~al.}, ``Supervised and unsupervised
+  discretization of continuous features,'' in \emph{Machine learning:
+  proceedings of the twelfth international conference}, vol.~12, 1995, pp.
+  194--202.
+
 \end{thebibliography}
