@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.3)  30 APR 2017 21:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.3)  2 MAY 2017 22:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -466,7 +466,30 @@ File: tikzlibraryplotmarks.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
 (c:/texlive/2016/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.
 tex
 File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
-))) (./cmp_pgr_sample_paper.aux
+))) (c:/texlive/2016/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
+
+(c:/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(c:/texlive/2016/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen169
+\captionmargin@=\dimen170
+\captionwidth=\dimen171
+\caption@tempdima=\dimen172
+\caption@indent=\dimen173
+\caption@parindent=\dimen174
+\caption@hangindent=\dimen175
+)
+\c@ContinuedFloat=\count123
+Package caption Info: listings package is loaded.
+)
+\c@subfigure=\count124
+\c@subtable=\count125
+)
+(./cmp_pgr_sample_paper.aux
 
 LaTeX Warning: Label `tab:example' multiply defined.
 
@@ -491,16 +514,16 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 (c:/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count123
-\scratchdimen=\dimen169
+\scratchcounter=\count126
+\scratchdimen=\dimen176
 \scratchbox=\box40
-\nofMPsegments=\count124
-\nofMParguments=\count125
+\nofMPsegments=\count127
+\nofMParguments=\count128
 \everyMPshowfont=\toks32
-\MPscratchCnt=\count126
-\MPscratchDim=\dimen170
-\MPnumerator=\count127
-\makeMPintoPDFobject=\count128
+\MPscratchCnt=\count129
+\MPscratchDim=\dimen177
+\MPnumerator=\count130
+\makeMPintoPDFobject=\count131
 \everyMPtoPDFconversion=\toks33
 ) (c:/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/21 v0.22 Utility functions of pdfTeX for LuaTeX (HO
@@ -551,7 +574,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count129
+\c@lstlisting=\count132
 
 ABD: EveryShipout initializing macros
 
@@ -560,6 +583,8 @@ ick labels; missing features). Consider writing \pgfplotsset{compat=1.14} into
 your preamble.
  on input line 29.
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 30.
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 30.
@@ -570,111 +595,74 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 32.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 39.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 46.
+(Font)              <9> on input line 86.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 46.
+(Font)              <6> on input line 86.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 46.
+(Font)              <5> on input line 86.
 
-Underfull \vbox (badness 8019) has occurred while \output is active []
-
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \vbox (badness 4341) has occurred while \output is active []
+Underfull \vbox (badness 3579) has occurred while \output is active []
 
  [1{c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 123.
-
-
-(c:/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 123.
-
-<sparam_1_errors.png, id=17, 539.616pt x 404.712pt>
-File: sparam_1_errors.png Graphic file (type png)
- <use sparam_1_errors.png>
-Package pdftex.def Info: sparam_1_errors.png used on input line 139.
-(pdftex.def)             Requested size: 215.84258pt x 161.88193pt.
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<AVTTS-Overview.png, id=18, 805.0075pt x 241.90375pt>
-File: AVTTS-Overview.png Graphic file (type png)
- <use AVTTS-Overview.png>
-Package pdftex.def Info: AVTTS-Overview.png used on input line 148.
-(pdftex.def)             Requested size: 402.50278pt x 120.95157pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
-\OT1/ptm/m/n/9 Hyperlinks should be writ-ten in full, e.g.,
+[2] (./cmp_pgr_sample_paper.bbl
+Underfull \hbox (badness 1755) in paragraph at lines 39--42
+[]\OT1/ptm/m/n/9 ``Uci ma-chine learn-ing repos-i-tory: Plan-
  []
 
 
-Underfull \hbox (badness 6775) in paragraph at lines 201--202
-\OT1/pcr/m/n/9 http://www.cmp.uea.ac.uk\OT1/ptm/m/n/9 , and must be coloured
+Underfull \hbox (badness 1708) in paragraph at lines 39--42
+\OT1/ptm/m/n/9 ning re-lax data set.'' [On-line]. Avail-able:
  []
 
-[2 <./sparam_1_errors.png (PNG copy)>]
-
-LaTeX Warning: Citation `massaro98:perceiving' on page 3 undefined on input lin
-e 213.
-
-
-LaTeX Warning: Citation `theobald04:specomm' on page 3 undefined on input line 
-213.
+[3]
+Underfull \hbox (badness 1082) in paragraph at lines 73--77
+[]\OT1/ptm/m/n/9 A. Galkin, ``Bag-ging, boost-ing and stack-
+ []
 
 
-LaTeX Warning: Citation `theobald08:lips' on page 3 undefined on input line 213
-.
+Underfull \hbox (badness 10000) in paragraph at lines 73--77
+\OT1/ptm/m/n/9 https://stats.stackexchange.com/questions/18891/bagging-
+ []
 
+) [4
 
-LaTeX Warning: Citation `cox08:avsp' on page 3 undefined on input line 213.
-
-
-LaTeX Warning: Citation `matthews2002:extraction' on page 3 undefined on input 
-line 213.
-
-(./cmp_pgr_sample_paper.bbl) [3
-
- <./AVTTS-Overview.png>]
-(./cmp_pgr_sample_paper.aux)
-
-LaTeX Warning: There were undefined references.
-
+] (./cmp_pgr_sample_paper.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 22352 strings out of 493013
- 576932 string characters out of 6136993
- 777112 words of memory out of 5000000
- 25517 multiletter control sequences out of 15000+600000
- 19486 words of font info for 39 fonts, out of 8000000 for 9000
+ 23864 strings out of 493013
+ 609091 string characters out of 6136993
+ 786112 words of memory out of 5000000
+ 27027 multiletter control sequences out of 15000+600000
+ 17901 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,8n,96p,1075b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,21n,96p,1075b,2565s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/texlive/2016/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2016/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmmi9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmr6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
-9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texliv
-e/2016/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2016/texmf-dist/
-fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/ti
-mes/utmri8a.pfb>
-Output written on cmp_pgr_sample_paper.pdf (3 pages, 137826 bytes).
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2016/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmmi9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmr6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r9.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb><c:
+/texlive/2016/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2016/te
+xmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/typ
+e1/urw/times/utmr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri
+8a.pfb>
+Output written on cmp_pgr_sample_paper.pdf (4 pages, 129406 bytes).
 PDF statistics:
- 58 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
+ 61 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

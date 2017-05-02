@@ -8,55 +8,52 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Database file #1: sample_bib.bib.bib
-Warning--I didn't find a database entry for "massaro98:perceiving"
-Warning--I didn't find a database entry for "theobald04:specomm"
-Warning--I didn't find a database entry for "theobald08:lips"
-Warning--I didn't find a database entry for "cox08:avsp"
-Warning--I didn't find a database entry for "matthews2002:extraction"
 -- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in lindsley1950emotions
+Warning--empty journal in quinlan2004data
 
 Done.
-You've used 3 entries,
+You've used 14 entries,
             4087 wiz_defined-function locations,
-            849 strings with 7937 characters,
-and the built_in function-call counts, 2882 in all, are:
-= -- 229
-> -- 53
-< -- 31
-+ -- 32
-- -- 7
-* -- 149
-:= -- 424
-add.period$ -- 7
-call.type$ -- 3
-change.case$ -- 3
-chr.to.int$ -- 72
-cite$ -- 3
-duplicate$ -- 191
-empty$ -- 227
-format.name$ -- 9
-if$ -- 663
+            899 strings with 9292 characters,
+and the built_in function-call counts, 8892 in all, are:
+= -- 717
+> -- 153
+< -- 75
++ -- 88
+- -- 23
+* -- 413
+:= -- 1388
+add.period$ -- 30
+call.type$ -- 14
+change.case$ -- 13
+chr.to.int$ -- 162
+cite$ -- 16
+duplicate$ -- 658
+empty$ -- 745
+format.name$ -- 29
+if$ -- 2047
 int.to.chr$ -- 0
-int.to.str$ -- 3
-missing$ -- 30
-newline$ -- 32
-num.names$ -- 3
-pop$ -- 60
+int.to.str$ -- 14
+missing$ -- 112
+newline$ -- 71
+num.names$ -- 12
+pop$ -- 266
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 222
+skip$ -- 693
 stack$ -- 0
-substring$ -- 171
-swap$ -- 168
-text.length$ -- 7
+substring$ -- 393
+swap$ -- 505
+text.length$ -- 21
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 3
-warning$ -- 0
-while$ -- 15
-width$ -- 4
-write$ -- 53
-(There were 5 warnings)
+type$ -- 14
+warning$ -- 2
+while$ -- 41
+width$ -- 16
+write$ -- 153
+(There were 2 warnings)

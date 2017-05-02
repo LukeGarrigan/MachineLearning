@@ -15,9 +15,9 @@
 \setlength{\footnotesep}{3ex}
 \usepackage{listings}
 \usepackage{pgfplots}
+\usepackage{subcaption}
 
-
-\title{Probabilistic approach over Decision Trees for problems with discrete data with a small number of instances 2017 --- Norwich, UK}
+\title{Probabilistic approach over Decision Trees for problems with discrete data and a small number of instances 2017 --- Norwich, UK}
 \name{Luke M. Garrigan}
 \institution{
 	Machine Learning, University of East Anglia, UK
@@ -40,21 +40,39 @@ Bayesian classifiers are widely known for their optimality when attributes are i
 
 \section{Introduction}
 
-In machine learning a learner algorithm is given a set of training instances with their corresponding class labels, it then produces a classifier. The classifier takes unlabelled testing instances and assigns it to a class. Choosing the best suited algorithm specific to the sample set is not a trivial process. 
+In machine learning a learner algorithm is given a set of training instances with their corresponding class labels, it then produces a classifier. The classifier takes unlabelled testing instances and assigns it to a class. Choosing the best suited algorithm specific to the sample set is not a trivial process.
 
-Probabilistic classification is the application of approximating a joint distribution with a product distribution. Bayes rule is used to approximate the conditional probability of a given class label. Approaches such as \textit{naive} Bayes are among the most popular classifiers used in the machine learning community, derived from generative probability models they are generally easy to understand and the induction of these classifiers is extremely fast, requiring only a single pass through the data if all attributes are discrete \cite{kohavi1996scaling}. The \textit{naive} Bayes classifier is the simplest of models in this paper, it assumes that all attributes are independent of each other given the context of the class. Although the \textit{naive} assumption of independence is not true in terms of most sample sets, many papers such as \cite{domingos1997optimality} have proven that \textit{naive} Bayes classification accuracy is very competitive when compared with more complex state-of-the-art algorithms. 
-$$ P(A \mid B) = \frac{P(B \mid A) \, P(A)}{P(B)} $$
+Probabilistic classification is the application of approximating a joint distribution with a product distribution. Bayes rule is used to approximate the conditional probability of a given class label. Approaches such as \textit{naive} Bayes are among the most popular classifiers used in the machine learning community. Derived from generative probability models they are generally easy to understand and the induction of these classifiers is extremely fast, requiring only a single pass through the data if all attributes are discrete \cite{kohavi1996scaling}. The \textit{naive} Bayes classifier is the simplest of models in this paper, it assumes that all attributes are independent of each other given the context of the class. Although the \textit{naive} assumption of independence is not true in terms of most sample sets, many papers such as \cite{domingos1997optimality} have proven that \textit{naive} Bayes classification accuracy is very competitive when compared with more complex state-of-the-art algorithms. 
+
  
 
-Decision trees classify instances by sorting them down the tree from the root to some leaf node which represents the classification of the given instance. Nodes specify a test of some attribute of the instance and each branch from that node corresponds to one of the possible values for this attribute. A given instance is classified moving down the tree, the attribute specific to that node is tested. Following down the branch corresponding to the value of the attribute in the given example, this is then repeated until a leaf node is reached and a classification is made.
+Decision trees classify instances by sorting them down the tree from the root to some leaf node which represents the classification of the given instance. Nodes specify a test of some attribute of the instance and each branch from that node corresponds to one of the possible values for this attribute. A given instance is classified moving down the tree, the attribute specific to that node is tested. Following down the branch corresponding to the value of the attribute in the given example, this is then repeated until a leaf node is reached and a classification is made. Decision trees are convenient due to their transparency, they explicitly display all possible alternatives and pursues these alternatives to a conclusion. This allows for a comprehensive analysis of the consequences of each decision.
 
  
 
 
 \section{Data Description}
 
+
+\subsection{Case Study}
+\subsubsection{Dataset Information}
+Electroencephalography is a domain concerning recording and interpretation of the electroencephalogram (EEG).EEG is a record of the electric signal generated by the cooperative action of brain cells, or more precisely, the time course of extracellular field potentials generated by their synchronous action\cite{lindsley1950emotions}. EEG detects electrical activity in the brain using small, flat metal discs (electrodes) attached to the scalp. An EEG is used for diagnosing brain disorders, most frequently epilepsy. 
+
+
+
+For the current study, EEG data was collected 5 times on various days from a healthy right-handed subject of 25 years of age. The data was recorded on a Medelec Profile Digital EEG machine. The settings of high-frequency filter 50 Hz, low frequency filter 1.6 Hz, notch filter 50 Hz, sensitivity 70 micro volts/mm, and a sampling rate of 256 Hz were used for the basic signal processing. 
+
+In summary, the subject was asked to lie down in a relaxed position with eyes closed. The EEG recorded for the relaxed state for 5 minutes.Following this, an audible beep of 60 dB for 0.91 seconds was given before and after the subject was asked to mentally plan lifting of the right-hand thumb (no actual movement), after a gap of 5 minutes the same cue is given to repeat the experiment lasting approximately 30 minutes \cite{planning_relax_data_set}.
+
+\subsubsection{Attribute Information}
+By applying wavelet packet analysis on the original signal 12 wavelet coefficients in the 7-13 Hz frequency band were obtained. This is a classification problem to determine whether the subject is relaxing or planning. There are 182 instances; the univariate dataset contains 12 real attributes and a binary class label.
+ 
+
+
+
+
 \subsection{Discretization}
-Discretization concerns with the process of transferring continuous data into discrete counterparts. Numeric attributes were discretized into ten equal-length intervals, unless the number of uniquely observed values for an attribute was less than 10. This approach was compared in \cite{dougherty1995supervised} with entropy-based and purity-based methods, which are supervised algorithms. An empirical evaluation showed that the \textit{naive} Bayes algorithm significantly improved accuracy when features were discretized using an entropy-based method. However due to its simplicity the unsupervised binning discretization method was used.
+Discretization concerns with the process of transferring continuous data into discrete counterparts. Numeric attributes were discretized into ten equal-length intervals unless the number of uniquely observed values for an attribute was less than 10. This approach was compared in \cite{dougherty1995supervised} with entropy-based and purity-based methods, which are supervised algorithms. An empirical evaluation showed that the \textit{naive} Bayes algorithm significantly improved accuracy when features were discretized using an entropy-based method. However, due to its simplicity, the unsupervised binning discretization method was used.
 
 \subsection{Methods For Accuracy Estimation}
 
@@ -68,22 +86,48 @@ Discretization concerns with the process of transferring continuous data into di
 Cross-validation is a computationally expensive algorithm used to estimate performance, it uses all available instances as both training and testing sets. The dataset is split into $k$ equally sized non-overlapping subsets $S$. Given a fold $S_i$ a model is trained on $S \setminus S_i$, then $S_i$ is used to create the accuracy estimation.
 
 \subsubsection{Leave-One-Out Cross-Validation (LOOCV)}
-Leave-One-Out Cross-Validation is  K-fold cross validation where $K$ is equal to the number of instances in the dataset. The classifier is trained on all data expect the one instance being left out and the prediction is made. An average of the data is collected and used to evaluate the classifier. 
+Leave-One-Out Cross-Validation is  K-fold cross validation where $K$ is equal to the number of instances in the dataset. The classifier is trained on all data except the one instance being left, this is repeated until all instances in the dataset have been the test instance. An average of the data is collected and used to evaluate the classifier.
 
 \subsubsection{Bias And Variance Tradeoff}
-As $k$ increases the less bias the classification is in overestimating the true expected error because the folds will be closer to the total dataset. However in doing this it induces a significant amount of variance. To minimise the testing bias a large portion of the dataset must be used for training, meaning not much data is used for testing, this ensures that the model will be as close as possible to the the one that would be achieved from training using the entire dataset. Minimising the testing variance would mean quite the opposite, so a large amount of data would be used for testing, this ensures a more reliable estimate of error of the classifier.
+As $k$ increases the less bias the classification is in overestimating the true expected error as the folds will be closer to the total dataset. However, in doing this it induces variance. To minimise the testing bias a large portion of the dataset must be used for training, meaning not much data is used for testing, this ensures that the model will be as close as possible to the model achievable by training using the entire dataset. Minimising the testing variance would mean quite the opposite, a large amount of data would be used for testing, this ensures a more reliable estimate error of the classifier.
+	
+\begin{figure}[!ht]
+	\begin{subfigure}[b]{0.40\textwidth}
+		\begin{tikzpicture}
+		\begin{axis}[
+		width=\textwidth,
+		xlabel = Folds,
+		ylabel = Percent Accuracy,
+		xtick=data,
+		xticklabels={2,5,10,20,30,-5,-2,-1},
+		]
+		\addplot[mark=square,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(1,78.25891)+=(0,1.27109)-=(0,1.26891)
+			(2,81.65178)+=(0,0.7822)-=(0,0.80178)
+			(3,81.83036)-=(0,0.60036)+=(0,0.59964)
+			(4,82.5)-=(0,0.56)+=(0,0.56)
+			(5,82.45537)-=(0,0.365)+=(0,0.374)
+			(6,82.1429)
+			(7,82.1429)
+			(8,82.1429)};
+		
+		
+		\legend{Ecoli}
+		\end{axis}
+		\end{tikzpicture}
+	\end{subfigure}
+	\caption{Bias representation of cross-validation. The negative k-folds shows leave-k-out, -1 is LOOCV.}
+\end{figure} 
 
- 
-
-Due to the small sample sizes 10-fold cross-validation was used as an estimator in an attempt to minimise the estimation variance.
+Due to the small sample sizes 10-fold cross-validation was used as an estimator in an attempt to minimise the estimation variance. Figure 1 shows the bias and variance of k-fold cross-validation on arbitrary datasets using \textit{naive} bayes.
 
 
 \begin{table}[h]
 	\centering
-	\caption{An example table.}
+	\caption{Details of the data used.}
 	\begin{tabular}{|l|c|c|}
 		\hline
-		Data Set & Instances & Attributes \\\hline\hline
+		Dataset & Instances & Attributes \\\hline\hline
 		Echo cardiogram & 131 & 13\\
 		Teaching Assistant & 150 & 6\\
 		Seeds & 209 & 8\\
@@ -107,112 +151,113 @@ Due to the small sample sizes 10-fold cross-validation was used as an estimator 
 
 
 
-\subsection{Sections}
+\section{Classifier Description}
+\subsection{Probabalistic}
+\subsubsection{\textit{Naive} Bayes}
+\textit{Naive} Bayes was selected for testing due to its popularity for classification problems and its presence in the machine learning community. As its name suggests its assumptions are naive and are not generally concordant with the data; it assumes all attributes are independent of each other given the context of the class but has been shown to perform surprisingly well in many classification problems. It is computationally efficient as training is linear in both the number of instances and attributes \cite{frank2002locally}. 
 
-Section headings should be centred on the line, be in bold typeface, and only the first letter should be capitalised. Sub-headings are also in bold face, but appear flush left and are typeset in the base font size. Sub-sub-headings appear like sub-headings, except they are in italics and are not boldface. No more than 3 levels of headings are allowed.
+Let $C$ represent the classification variable, and let $C_k$ be the value of $C$.
+According to Bayes Rule, the probability of an instance $X$ with attributes $X = (x_1, x_2,.. , x_n)$
+having class label $C_k$ is
+$$ P(C_k \mid X) = \frac{P(X \mid C_k) \, P(C_k)}{P(X)} $$
+where $P(C_k \mid X)$ represents the posterior probability of class c given a predictor $X$. $P(X\mid C_k)$ is the likelihood; the probability of the predictor given $C_k$. $P(C_k)$ is the prior probability of $C_k$; the current knowledge of the class distribution and $P(X)$ is the predictor prior probability.
 
-\subsection{Headers and Footers}
+\textit{naive} Bayes assumes that all attributes are independent given the value of the class label.
 
-All headers and footers must be left empty. Your document should not contain page numbers etc. These will be added later.
+$$P(X|C_k)=P(x_1, x_2,.. , x_n \mid C_k) = \prod_{i=1}^{n}P(x_i|C_k) $$
 
-\subsection{Lists}
+So the conditional distribution over the class variable $C$ can be represented by:
+$$P(C_k \mid x_1,.. x_n) = \frac{1}{Z}P(C_k)\prod_{i=1}^{n}P(x_i \mid C_k)$$
+where $Z$ is a scaling factor dependent on $x_1, x_2,.. , x_n $. In order to build a classifier from this, a decision rule is used by picking the classification which is most probably; for two posterior probabilities $P(C_1|X)= 0.54$ and $P(C_2|X) =0.46$ using the \textit{maximum a posteriori} (MAP) rule, the larger of the two is chosen \cite{zhang2004optimality}.
 
-Itemised lists can be included in your document, but please check the indentation if you are not using \LaTeX. An example itemized list with the correct formatting should look like the following:
-%
-\begin{itemize}
-\item{First list item.}
-\item{Second list item.}
-\item{Third list item.}
-\end{itemize}
-%
 
-\subsubsection{List Depth}
+\subsubsection{Bayesian Networks}
+Bayesian networks belong to the family of probabilistic graphical models. Graphical model expresses the conditional dependence structure between random variables and are used to represent knowledge about uncertain domains. Nodes within a Bayesian network represent the random variables, edges represent the conditional dependencies; nodes not connected are conditionally independent of each other. Each node is associated with a probability function that takes as input a particular set of values for the node's parent variables and outputs the probability of the variable represented by the node \cite{heckerman1995learning}.
 
-Please try not to use hierarchical lists, these look cluttered in two-column format. Keep lists to a single level of depth.
+In Bayesian networks each node is conditionally independent of any subset of nodes that are not descendants of itself gives its parent, so the value of a node is conditional only on the values of its parent nodes. Let $V$ represent a node in the graph and $par(V_i)$ be the parent of the node:
+$$P(V_1, V_2, ... V_n) = \prod_{i=1}^{n}P(V_i \mid par(V_i))$$
 
-\subsection{Figures}
+So to compute the joint probabilities we must calculate the conditional probability between itself and its parent for each node in the graph. The chain rule is then computer to determine the graphs joint probability functions. 
 
-All figures must be centred on the column (or page, if the figure spans both columns). A figure caption should follow the figure and be formatted like the example in Figure~\ref{fig:columnfigure}.
+$$P(V_1, V_2, ... V_n) = P(V_1)P(V_2 \mid V_1)P(V_3 \mid V_1, V_2)$$
 
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.4]{sparam_1_errors}
-\caption{An example of a figure centred on a single column. The figure is not centred automatically. To centre the figure, use \texttt{$\backslash$centering} within the \texttt{figure} environment.}
-\label{fig:columnfigure}
-\end{figure}
 
-Figures spanning multiple columns should appear either at the top or the bottom of the page. You can use the $\backslash$figure* command to span a figure across both columns. An example is shown in Figure~\ref{fig:pagefigure}.
+\textit{Prior probabilities} are nodes without parents; they are not conditioned on other random variables \cite{jensen1996introduction}.
 
-\begin{figure*}[tb]
-\centering
-\includegraphics[scale=0.5]{AVTTS-Overview}
-\caption{An example of a figure spanning both columns and centred on a page. Again, the figure is not centred automatically.}
-\label{fig:pagefigure}
-\end{figure*}
 
-Figures should preferably be line drawings. The proceedings will not be produced in colour, so please do not rely on colour to distinguish between curves on a graphs, etc. You should check to ensure the figures print well on a good quality printer, and that there are no issues when colour figures are printed in grey-scale.
+Bayesian networks do not necessarily imply a commitment to Bayesian statistics, it is common to use frequentists methods to estimate the parameters of the CPDS.
 
-Before including any figures in your document you should ensure you have the necessary copyright permission.
 
-\subsection{Tables}
+\subsection{Decision Trees}
+\subsubsection{C4.5}
+C4.5 is an algorithm used to build decision trees, they are created using a divide-and-conquer approach. The tree is formed using information entropy as found in the ID3 algorithm which is a precursor to C4.5, however, this paper only covers the C4.5 algorithm. C4.5 offers a number of improvements over ID3: handling data with missing values, accepts both continuous and discrete attributes, handling attributes with different costs and solves over-fitting by pruning.Ross Quinlan's latest iteration is the C5.0 algorithm which he states is several orders of magnitude faster than C4.5 \cite{quinlan2004data}, unfortunately, this software is proprietary thus not compared.
 
-Tables should be centred on a column if possible. There is no strict requirement on the style as this will largely depend on the content to be displayed. An example table is shown in Table~\ref{tab:example}, but this is provided for illustrative purposes only.
+Entropy is a measure of unpredictability, Shannon entropy calculates the level of uncertainty:
+$$Entropy(P) = -\sum_{i=1}^{n}P_i(\log_2P_i)$$
 
-\begin{table}[h]
-\centering
-\caption{An example table.}
-\begin{tabular}{|c|c|}
-\hline
-Trial & Score \\\hline\hline
-1 & 10 \\
-2 & 12 \\
-3 & 11 \\
-4 & 9 \\
-5 & 11 \\
-6 & 10 \\\hline
-\end{tabular}
-\label{tab:example}
-\end{table}
+Information gain measures the expected reduction in entropy caused by partitioning according to the given attribute.
+$$Gain(S,A)=Entropy(S)- \sum_{v in Values}^{}\frac{|S_v|}{|S|}Entropy(S)$$
 
-Note, for tables the caption should be above the table, as shown in Table~\ref{tab:example}.
+C4.5 is implemented recursively, let $T$ be the set of training instances, the algorithm chooses an attribute that best differentiates the instances contained in $T$, a tree node is created with the value of the chosen attribute. Child nodes are created each link represents a unique value for the given attribute, the child values are then used to further subdivide the instances into subclasses. The subclasses either satisfy the predefined criteria or the remaining attributes choice for the path is null, this is repeated recursively. The classifications for the testing instances is made by following the decision path.
 
-\subsection{Equations}
+\subsubsection{Random Forests}
+Meta-algorithms are approaches to combine several machine learning techniques into one predictive model in order to decrease the variance (bagging) or bias (boosting) \cite{galkin}. 
 
-Equations should appear on a separate line, they should be centred and they should be numbered. Some examples are:
-%
-\begin{equation}
-y = mx + c,
-\label{eqn:line}
-\end{equation}
-%
-which obviously is the equation of a straight-line of gradient $m$ and intersecting the vertical axis at $c$. Another famous equation with $m$ and $c$ is
-%
-\begin{equation}
-E = mc^2.
-\label{eqn:einstein}
-\end{equation}
 
-\subsection{Fonts}
+Ensemble learning methods generate many classifiers and aggregate their results. Random forest incorporates a supplementary layer of randomness to bagging, in addition to constructing each tree using a different bootstrap sample of the data.
+Random forests construct the classification distinctly using the best among a subset of predictors randomly chosen at that node \cite{liaw2002classification}. Although the approach is somewhat counter-intuitive it has been shown to outperform many state-of-the-art classifiers.
 
-You should use 9 point Times or Times Roman for the main text. All fonts should be embedded in the final PDF document.
 
-\subsection{Hyperlinks}
+\subsubsection{Logistic Model Trees}
+Logistic Model Trees (LMT) use a combination of a tree structure and logistic regression models to for a single tree. \cite{landwehr2005logistic} performed experiments showing that LMT produces more accurate classifiers than C4.5, CART, logistic regression, model trees, functional trees, \textit{naive} Bayes trees and Lots.
 
-Hyperlinks should be written in full, e.g., \texttt{http://www.cmp.uea.ac.uk}, and must be coloured black. For ease of readability, authors are advised to use a different font family from the main text.
+
+LMT is a combination of learners which rely on logistic regression models.
+Logistic regression is used to describe data and to explain the relationship between one dependent binary variable and one or more nominal, ordinal, interval or ratio-level independent variables \cite{statistics_solutions}. LMT uses cost-complexity pruning. The compute time of LMT is much greater than the other algorithms.
+
+ 
+ 
+\section{Results}
+
+\begin{table*}[t]
+	\centering
+	\caption{An example table.}
+	\begin{tabular}{|l|c|c|c|c|c|c|}
+		\hline
+		Dataset & \textit{Naive} Bayes & Bayes Net & C4.5 &Random Forests & LMT \\\hline\hline
+		Echo cardiogram & $91.42\pm0.5$  & 13 & 0 & 0 & 0\\
+		Teaching Assistant & 150 & 6 & 0 & 0 & 0\\
+		Seeds & 209 & 8 & 0 & 0 & 0\\
+		Planning Relax & 180 & 13 & 0 & 0 & 0\\
+		Hepatitis & 154 & 20 & 0 & 0 & 0\\
+		Breast Cancer & 284 & 10 & 0 & 0 & 0\\
+		Ecoli & 223 &10  & 0 & 0 & 0\\
+		Glass & 141 &6   & 0 & 0 & 0\\
+		Haberman & 203  &4 & 0 & 0  & 0\\
+		Hayes Roth & 158 &5 & 0 & 0  & 0\\
+		Heart & 169 & 14 & 0 & 0 & 0\\
+		Lymphography & 156 &19 & 0  & 0 & 0\\
+		Promoters & 104 &58 & 0  & 0  & 0\\
+		Shuttle Landing & 252  &7 & 0 & 0 & 0 \\
+		Sonar & 137 &61 & 0 & 0  & 0\\
+		Thyroid & 142 & 6 & 0 & 0 & 0\\\hline
+	\end{tabular}
+	\label{tab:example}
+\end{table*}
+
+
+
+
+
 
 \subsection{Supplementary Material}
 
-Authors may submit supplementary material with their paper. However, this should not be included in place of a technical description of your work. Reviewers are not obliged to watch video sequences, and your submission will be reviewed on the strength of the paper only. If you are submitting a multimedia file, please use widely accepted formats/codecs. The conference proceedings will not include media players.
 
 \section{Conclusions}
 
-The page limit is 4--6 pages. Please, please use \LaTeX\ to typeset your document. This will minimise any formatting headaches!
 
 \subsection{References}
 
-You must reference any papers you have had accepted or are under review here. Example references~\cite{massaro98:perceiving}, audio-visual speech synthesis~\cite{theobald04:specomm,theobald08:lips}, and audio-visual speech recognition~\cite{cox08:avsp,matthews2002:extraction}.
-
-See the references section for the formatting of the references from different sources (conferences, journals, and books). The formatting of references follows the standard IEEE format, \LaTeX\ users should download the \texttt{IEEEtran} bibliography format. References should be listed in order of citation.
 
 \bibliographystyle{IEEEtran}
 \bibliography{sample_bib.bib}
