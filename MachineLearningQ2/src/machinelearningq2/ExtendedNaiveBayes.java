@@ -65,9 +65,8 @@ public class ExtendedNaiveBayes implements Classifier {
         }
         System.out.println("Attribute Totals: " + Arrays.deepToString(attributeMeans));
         // computes the means
-        System.out.println(Arrays.toString(classValueCounts));
         for (int j = 0; j < classValueCounts.length; j++) {
-            for (int i = 0; i < ins.numAttributes()-1; i++) {
+            for (int i = 0; i < ins.numAttributes() - 1; i++) {
                 attributeMeans[j][i] = attributeMeans[j][i] / classValueCounts[j];
             }
         }
@@ -80,9 +79,8 @@ public class ExtendedNaiveBayes implements Classifier {
             attributeVariance[(int) cv][(int) atIn] += squareDifference;
         }
         for (int j = 0; j < classValueCounts.length; j++) {
-            for (int i = 0; i < ins.numAttributes()-1; i++) {
+            for (int i = 0; i < ins.numAttributes() - 1; i++) {
                 attributeVariance[j][i] = attributeVariance[j][i] / (classValueCounts[j] - 1);
-                // to get the variance from the std
                 attributeVariance[j][i] = Math.sqrt(attributeVariance[j][i]);
             }
         }
@@ -117,7 +115,6 @@ public class ExtendedNaiveBayes implements Classifier {
             correctCount++;
         }
 
-        // System.out.println("Class Membership: " + largestIndex);
         return largestIndex;
     }
 

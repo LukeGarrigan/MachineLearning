@@ -31,10 +31,9 @@ public class BasicNaiveBayesV1 implements Classifier {
      */
     @Override
     public void buildClassifier(Instances ins) throws Exception {
-
+        ins.setClassIndex(ins.numAttributes() - 1);
         countData = ins.size();
         // assigns the class position of the instance 
-        ins.setClassIndex(ins.numAttributes() - 1);
         classValueCounts = new int[ins.numClasses()];
         // store the values
         for (Instance line : ins) {
@@ -43,7 +42,6 @@ public class BasicNaiveBayesV1 implements Classifier {
             for (int i = 0; i < line.numAttributes() - 1; i++) {
                 double attributeValue = line.value(i);
                 DataFound d = new DataFound(attributeValue, classValue, i);
-
                 int index = data.indexOf(d);
                 // then it doesn't exist
                 if (index == -1) {
@@ -53,16 +51,6 @@ public class BasicNaiveBayesV1 implements Classifier {
                 }
             }
         }
-
-        // compute the conditional probabilities
-        System.out.println(data.size());
-
-        for (DataFound x : data) {
-            double classValueCount = classValueCounts[(int) x.getClassValue()];
-            x.computeConditionalProbability(classValueCount);
-            System.out.println(x);
-        }
-
         System.out.println("");
 
         System.out.println(Arrays.toString(classValueCounts));
@@ -124,7 +112,8 @@ public class BasicNaiveBayesV1 implements Classifier {
 
                 int index = data.indexOf(d);
                 if (index != -1) {
-                    conditionalProbs.add(data.get(index).getConditionalProbability());
+                    double classValueCount = classValueCounts[(int) d.getClassValue()];
+                    conditionalProbs.add(data.get(index).getConditionalProbability((int)classValueCount));
                 }
             }
             System.out.println(conditionalProbs);

@@ -76,10 +76,11 @@ public class DataFound {
         return hash;
     }
 
-    public double getConditionalProbability() {
-        return conditionalProbability;
+    public double getConditionalProbability(double priorCount) {
+        return this.conditionalProbability = counts / priorCount;
     }
 
+    
     public void computeLikelihood(double mean, double variance) {
         this.likelihood = Math.pow((1 / Math.sqrt(2 * Math.PI) * variance),
                 (-((attributeValue - mean) * (attributeValue - mean)) / 2
@@ -87,9 +88,6 @@ public class DataFound {
 
     }
 
-    public void computeConditionalProbability(double priorCount) {
-        this.conditionalProbability = counts / priorCount;
-    }
 
     @Override
     public String toString() {

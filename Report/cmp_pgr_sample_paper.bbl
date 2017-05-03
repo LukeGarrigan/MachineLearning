@@ -40,12 +40,6 @@ D.~B. Lindsley, ``Emotions and the electroencephalogram.'' 1950.
   Available: \url{http://archive.ics.uci.edu/ml/datasets/Planning Relax}
 \BIBentrySTDinterwordspacing
 
-\bibitem{dougherty1995supervised}
-J.~Dougherty, R.~Kohavi, M.~Sahami \emph{et~al.}, ``Supervised and unsupervised
-  discretization of continuous features,'' in \emph{Machine learning:
-  proceedings of the twelfth international conference}, vol.~12, 1995, pp.
-  194--202.
-
 \bibitem{frank2002locally}
 E.~Frank, M.~Hall, and B.~Pfahringer, ``Locally weighted naive bayes,'' in
   \emph{Proceedings of the Nineteenth conference on Uncertainty in Artificial
@@ -88,5 +82,22 @@ N.~Landwehr, M.~Hall, and E.~Frank, ``Logistic model trees,'' \emph{Machine
 ``What is logistic regression?'' [Online]. Available:
   \url{http://www.statisticssolutions.com/what-is-logistic-regression/}
 \BIBentrySTDinterwordspacing
+
+\bibitem{dougherty1995supervised}
+J.~Dougherty, R.~Kohavi, M.~Sahami \emph{et~al.}, ``Supervised and unsupervised
+  discretization of continuous features,'' in \emph{Machine learning:
+  proceedings of the twelfth international conference}, vol.~12, 1995, pp.
+  194--202.
+
+\bibitem{kohavi1995study}
+R.~Kohavi \emph{et~al.}, ``A study of cross-validation and bootstrap for
+  accuracy estimation and model selection,'' in \emph{Ijcai}, vol.~14,
+  no.~2.\hskip 1em plus 0.5em minus 0.4em\relax Stanford, CA, 1995, pp.
+  1137--1145.
+
+\bibitem{witten2016data}
+I.~H. Witten, E.~Frank, M.~A. Hall, and C.~J. Pal, \emph{Data Mining: Practical
+  machine learning tools and techniques}.\hskip 1em plus 0.5em minus
+  0.4em\relax Morgan Kaufmann, 2016.
 
 \end{thebibliography}
