@@ -29,39 +29,31 @@ public class MachineLearningQ2 {
         // paths for the training and test data
         String trainingDataPath = "datasets/diabetes/diabetes-train.arff";
         String testDataPath = "datasets/diabetes/diabetes-test.arff";
-
+        /*
+        String trainingDataPath = "datasets/crime.arff";
+        String testDataPath = "datasets/crimeTest.arff";
+         */
         // creating the instances
         Instances trainingData = getData(trainingDataPath);
         Instances testData = getData(testDataPath);
 
-        BasicNaiveBayesV1 b = new BasicNaiveBayesV1();
+        /*
+        BasicNaiveBayesV1 b = new BasicNaiveBayesV1(true);
         b.buildClassifier(trainingData);
 
-        /*
         for (Instance x : testData) {
             b.classifyInstance(x);
         }
          */
-        ExtendedNaiveBayes c = new ExtendedNaiveBayes();
+        ExtendedNaiveBayes c = new ExtendedNaiveBayes(true, "d");
         c.buildClassifier(trainingData);
         testData.setClassIndex(testData.numAttributes() - 1);
+
         for (Instance x : testData) {
             c.classifyInstance(x);
         }
         c.getAccuracy();
 
-        /*
-        // train NaiveBayes
-        Classifier cModel = (Classifier) new NaiveBayes();
-        cModel.buildClassifier(trainingData);
-        // Test the model
-
-        Evaluation eTest = new Evaluation(trainingData);
-        testData.setClassIndex(testData.numAttributes()-1);
-        eTest.evaluateModel(cModel, testData);
-        String strSummary = eTest.toSummaryString();
-        System.out.println(strSummary);
-         */
     }
 
     /**

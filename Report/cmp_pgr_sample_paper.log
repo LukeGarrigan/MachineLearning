@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.3)  3 MAY 2017 22:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2016.10.3)  4 MAY 2017 01:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -940,22 +940,31 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 33.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 40.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 57.
+
+(c:/texlive/2016/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 57.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[1{c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+ [1{c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 ] [2] [3]
-Underfull \hbox (badness 2213) in paragraph at lines 266--267
+Underfull \hbox (badness 2213) in paragraph at lines 282--283
 \OT1/ptm/m/n/9 All clas-si-fiers were put to a timed test us-ing the largest
  []
 
 (./cmp_pgr_sample_paper.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [4]
+Overfull \vbox (20.41745pt too high) has occurred while \output is active []
+
+
 Underfull \hbox (badness 1755) in paragraph at lines 39--42
 []\OT1/ptm/m/n/9 ``Uci ma-chine learn-ing repos-i-tory: Plan-
  []
@@ -975,16 +984,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--71
 \OT1/ptm/m/n/9 https://stats.stackexchange.com/questions/18891/bagging-
  []
 
-) [4] [5] (./cmp_pgr_sample_paper.aux)
+[5]) [6
+
+] (./cmp_pgr_sample_paper.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 33354 strings out of 493013
- 823087 string characters out of 6136993
- 907834 words of memory out of 5000000
- 36458 multiletter control sequences out of 15000+600000
+ 33397 strings out of 493013
+ 823866 string characters out of 6136993
+ 939250 words of memory out of 5000000
+ 36498 multiletter control sequences out of 15000+600000
  19310 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,21n,96p,10373b,2562s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -999,10 +1010,10 @@ mr6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb><c:
 dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1
 /urw/times/utmb8a.pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmr8a.
 pfb><c:/texlive/2016/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on cmp_pgr_sample_paper.pdf (5 pages, 153410 bytes).
+Output written on cmp_pgr_sample_paper.pdf (6 pages, 160511 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 52 compressed objects within 1 object stream
+ 75 PDF objects out of 1000 (max. 8388607)
+ 54 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

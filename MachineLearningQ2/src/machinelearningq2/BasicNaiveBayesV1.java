@@ -5,6 +5,8 @@
  */
 package machinelearningq2;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import weka.classifiers.Classifier;
@@ -21,6 +23,11 @@ public class BasicNaiveBayesV1 implements Classifier {
     private int[] classValueCounts;
     private ArrayList<DataFound> data = new ArrayList<>();
     private double countData;
+    private boolean laplace;
+
+    public BasicNaiveBayesV1(boolean laplace) {
+        this.laplace = laplace;
+    }
 
     /**
      *
@@ -35,6 +42,10 @@ public class BasicNaiveBayesV1 implements Classifier {
         countData = ins.size();
         // assigns the class position of the instance 
         classValueCounts = new int[ins.numClasses()];
+        System.out.println(ins);
+        if (laplace == true) {
+            laplaceCorrection(ins);
+        }
         // store the values
         for (Instance line : ins) {
             double classValue = line.classValue();
@@ -113,7 +124,7 @@ public class BasicNaiveBayesV1 implements Classifier {
                 int index = data.indexOf(d);
                 if (index != -1) {
                     double classValueCount = classValueCounts[(int) d.getClassValue()];
-                    conditionalProbs.add(data.get(index).getConditionalProbability((int)classValueCount));
+                    conditionalProbs.add(data.get(index).getConditionalProbability((int) classValueCount));
                 }
             }
             System.out.println(conditionalProbs);
@@ -135,6 +146,30 @@ public class BasicNaiveBayesV1 implements Classifier {
     @Override
     public Capabilities getCapabilities() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * Performs lapalce correction to ensure there are no zero values in the
+     * data Creating a DataFound object ensures the count starts from 1
+     *
+     * @param instnc
+     * @return
+     * @throws Exception
+     */
+    public void laplaceCorrection(Instances inst) throws ParseException {
+        inst.setClassIndex(inst.numAttributes() - 1);
+        for (int c = 0; c < inst.numClasses(); c++) {
+            for (int j = 0; j < inst.numAttributes() - 1; j++) {
+                for (int i = 0; i < inst.numDistinctValues(j); i++) {
+                    String attributeValue = inst.attribute(j).value(i);
+                    NumberFormat nf = NumberFormat.getInstance();
+                    double atval = nf.parse(attributeValue).doubleValue();
+                    DataFound d = new DataFound(atval, c, i);
+                    data.add(d);
+                }
+            }
+        }
     }
 
     public void prettyPrintProbabilities(double[] x) {

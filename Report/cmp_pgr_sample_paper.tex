@@ -53,7 +53,23 @@ Decision trees classify instances by sorting them down the tree from the root to
 
 
 \section{Data Description}
-
+\begin{itemize}
+	\item \textit{Teaching Assistant} consists of evaluations of teaching performance the scores are divided into 3 roughly equal-size categories ("low", "medium," and "high").
+	\item \textit{Seeds} comprises of data belonging to three different varieties of wheat: Kama, Rosa and Canadian. The classification is to determine which wheat it is given its characteristics
+	\item \textit{Breast Cancer} is data to determine whether a tumor has the ability to invade neighbouring tissue. (Benign or Malignant) 
+	
+    \item \textit{Ecoli} 
+	\item \textit{Glass} classification of types of glass, motivated by criminology investigation.
+	\item \textit{Haberman} is data from the survival of patients who had undergone surgery for breast cancer.
+	\item \textit{Hayes Roth}
+	\item \textit{Heart}
+	\item \textit{Lymphography} provided by the Oncology Institute to determine whether tumours are metastases, malign or fibrous.
+	\item \textit{Promoters} is data for promoter gene sequences (DNA), the class labels are binary, either a promoter or not a promoter.
+	\item \textit{Shuttle Landing} rules for determining the conditions under which an autolanding would be preferable to manual control of the spacecraft the class label is either auto or noauto.
+	\item \textit{Sonar} patterns obtained by bouncing sonar signals off a metal cylinder at various angles and under various conditions. The label associated with each record contains the letter "R" if the object is a rock and "M" if it is a mine (metal cylinder).
+	\item \textit{Thyroid}
+	
+\end{itemize}
 
 \subsection{Case Study}
 \subsubsection{Dataset Information}
@@ -265,6 +281,8 @@ it is possible that some of these datasets contain little attribute dependencies
 \subsection{Timing Experiment}
 All classifiers were put to a timed test using the largest dataset(Ecoli). Table 3 shows results for experiments performed on all classifiers, the data was split up into training and testing. The training data was split randomly by a set percentage of its original size, the size of the testing data was kept constant throughout. As expected, as the training data decreases in size so does the time taken to train the classifier, this is consistent through all algorithms. The testing data seemed to follow unexpected trends; when the training set was at its largest for \textit{naive} Bayes, Bayes Net, C4.5 and Random Forest all outputted the smallest evaluation time. The time taken for the testing set continued to increase until 60\% where it seemed to plateau.
 
+Figure 2 shows the comparison of \textit{naive} Bayes, Bayes Net and C4.5 showing the relationship between amount of training instances and the increase inevitable increase in time. Figure 3 shows the same relationship between LMT and random forests, a different graph was used because the time taken to build the classifer for LMT and random forests (specifically LMT) are much larger than the other algorithms.
+
 \begin{table*}[t]
 	\centering
 	\caption{Timed Experiment Of All Classifiers, training (top five rows) and testing (bottom five) }
@@ -286,6 +304,128 @@ All classifiers were put to a timed test using the largest dataset(Ecoli). Table
 	\end{tabular}
 \end{table*}
 
+
+\begin{figure}[!ht]
+	\begin{subfigure}[b]{0.40\textwidth}
+		\begin{tikzpicture}
+		\begin{axis}[
+		width=\textwidth,
+		xlabel = \% Training Data,
+		ylabel = Time(s),
+		xtick=data,
+		xticklabels={100,80,60,40,20},
+		]
+		\addplot[mark=square,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.0011)
+			(80,0.0003)
+			(60,0.0004)
+			(40,0.0001)
+			(20,0.0001)};
+		
+		\addplot[mark=triangle,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.0047)
+			(80,0.0019)
+			(60,0.0025)
+			(40,0.0005)
+			(20,0.0002)};
+		
+	     \addplot[mark=*,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.011)
+			(80,0.0043)
+			(60,0.0024)
+			(40,0.0008)
+			(20,0)};
+		\end{axis}
+		\end{tikzpicture}
+	\end{subfigure}
+	\caption{Training timing Experiment, square = \textit{naive} Bayes, triangle = Bayes Net and diamond = C4.5 }
+\end{figure} 
+
+
+
+\begin{figure}[!ht]
+	\begin{subfigure}[b]{0.40\textwidth}
+		\begin{tikzpicture}
+		\begin{axis}[
+		width=\textwidth,
+		xlabel = \% Training Data,
+		ylabel = Time(s),
+		xtick=data,
+		xticklabels={100,80,60,40,20},
+		]
+		\addplot[mark=square,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.1286)
+			(80,0.0832)
+			(60,0.0516)
+			(40,0.0227)
+			(20,0.0062)};
+		
+		\addplot[mark=triangle,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,1.2791)
+			(80,0.6901)
+			(60,0.414)
+			(40,0.1161)
+			(20,0.0168)};
+		
+		\end{axis}
+		\end{tikzpicture}
+	\end{subfigure}
+	\caption{Training timing Experiment, square = Random Forest, triangle = LMT }
+\end{figure} 
+
+
+
+
+\begin{figure}[!ht]
+	\begin{subfigure}[b]{0.40\textwidth}
+		\begin{tikzpicture}
+		\begin{axis}[
+		width=\textwidth,
+		xlabel = \% Training Data,
+		ylabel = Time(s),
+		xtick=data,
+		xticklabels={100,80,60,40,20},
+		]
+		\addplot[mark=square,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.0029)
+			(80,0.0077)
+			(60,0.0090)
+			(40,0.0090)
+			(20,0.0087)};
+		
+		\addplot[mark=triangle,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.0007)
+			(80,0.0014)
+			(60,0.0017)
+			(40,0.0015)
+			(20,0.0011)};
+		
+		\addplot[mark=*,error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.0002)
+			(80,0.0004)
+			(60,0.0008)
+			(40,0.0005)
+			(20,0.0008)};
+		\addplot[error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.0042)
+			(80,0.0096)
+			(60,0.0111)
+			(40,0.0085)
+			(20,0.0040)};
+		
+		\addplot[error bars/.cd, y dir=both, y explicit, ] coordinates{
+			(100,0.0005)
+			(80,0.0004)
+			(60,0.0007)
+			(40,0.0009)
+			(20,0.0004)};
+		
+		
+		\end{axis}
+		\end{tikzpicture}
+	\end{subfigure}
+	\caption{Timing Experiment, square = Random Forest, triangle = LMT }
+\end{figure} 
 
 
 \subsection{Supplementary Material}
